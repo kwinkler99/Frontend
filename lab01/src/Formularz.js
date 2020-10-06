@@ -1,18 +1,30 @@
 import React, {useState} from "react";
 
 
-const Formularz = (props) => {
+const Formularz = () => {
     const [text, setText] = useState("");
     const [list, setList] = useState([]);
-    const [date, setDate] = useState("")
+    const [date, setDate] = useState(new Date());
+    const [warning, setWarning] = useState("");
+
+    
+
 
     function addText_to_List(event) {
-        setList([...list, {text, date}]);
-        setDate("")
-        setText("")
+        let now = Date.now();
+        if(text !== "" && date !== ""){
+            setList([...list, {text, date}]);
+            setDate("");
+            setText("");
+            setWarning("");
+        }
+        else if(Date.parse(date) < now){
+            setWarning("UWAGA! Podano zla date");
+        }
+        else{
+            setWarning("UWAGA! Nie zawarto tekstu lub daty");
+        }
     }
-
-
 
 
 
@@ -40,6 +52,7 @@ const Formularz = (props) => {
                     onClick = {addText_to_List}
                     value ="Zatwierdz"/>
             </form>
+            <div>{warning}</div>
         </div>
     )
 }
