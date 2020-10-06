@@ -4,8 +4,9 @@ import React, {useState} from "react";
 const Formularz = () => {
     const [text, setText] = useState("");
     const [list, setList] = useState([]);
-    const [date, setDate] = useState(Date(Date.now()));
-    const [warning, setWarning] = useState("");
+    const [date, setDate] = useState("");
+    const [warning_date, setWarning_Date] = useState("");
+    const [warning_text, setWarning_Text] = useState("");
     const months = {
         'Jan' : '01',
         'Feb' : '02',
@@ -32,13 +33,21 @@ const Formularz = () => {
             setList([...list, {text, date}]);
             setDate("");
             setText("");
-            setWarning("");
+            setWarning_Date("");
+            setWarning_Text("");
         }
         else if(Date.parse(compare) >= Date.parse(date)){
-            setWarning("UWAGA! Podano zla date");
+            setWarning_Date("UWAGA! Podano zla date");
+        }
+        else if(text === "" && date !== ""){
+            setWarning_Text("UWAGA! Nie zawarto tekstu");
+        }
+        else if(date === "" && text !== ""){
+            setWarning_Date("UWAGA! Nie zawarto daty");
         }
         else{
-            setWarning("UWAGA! Nie zawarto tekstu lub daty");
+            setWarning_Date("UWAGA! Nie zawarto daty");
+            setWarning_Text("UWAGA! Nie zawarto tekstu");
         }
     }
 
@@ -50,25 +59,25 @@ const Formularz = () => {
                 Lista TO-DO:
                 {list
                 .map(choose => (
-                <div>{choose.text}, {choose.date}</div>
+                <div  key = {choose.text}>{choose.text}, {choose.date}</div>
                 ))}
             </div>
             <form>
                 <input 
                     type = "text"
                     value = {text}
-                    onChange ={(event) => {setText(event.target.value)}}/>
+                    onChange ={(event) => {setText(event.target.value)}}
+                />{warning_text}<br/>
                 <input
                     type ="date"
                     value = {date}
                     onChange= {(event) => {setDate(event.target.value)}}
-                />
+                />{warning_date}<br/>
                 <input 
                     type = "button" 
                     onClick = {addText_to_List}
                     value ="Zatwierdz"/>
             </form>
-            <div>{warning}</div>
         </div>
     )
 }
