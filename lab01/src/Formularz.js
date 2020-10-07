@@ -5,6 +5,7 @@ import ToDo from './to-do.js'
 const Formularz = () => {
     const [text, setText] = useState("");
     const [list, setList] = useState([]);
+    const [reload, setReload] = useState("")
     const [date, setDate] = useState("");
     const [warning_date, setWarning_Date] = useState("");
     const [warning_text, setWarning_Text] = useState("");
@@ -29,12 +30,15 @@ const Formularz = () => {
             setWarning_Text("");
         }
         else if(Date.parse(now_format) >= Date.parse(date_format)){
+            setWarning_Text("")
             setWarning_Date("UWAGA! Podano zla date");
         }
         else if(text === "" && date !== ""){
+            setWarning_Date("")
             setWarning_Text("UWAGA! Nie zawarto tekstu");
         }
         else if(date === "" && text !== ""){
+            setWarning_Text("")
             setWarning_Date("UWAGA! Nie zawarto daty");
         }
         else{
@@ -43,8 +47,13 @@ const Formularz = () => {
         }
     }
 
-    function addDone(event){
-        setList(list.filter(a => a !== {}))
+    function addDone(){
+        if(reload === "reload"){
+            setReload("reload again")
+        }
+        else{
+            setReload("reload")
+        }
     }
 
 

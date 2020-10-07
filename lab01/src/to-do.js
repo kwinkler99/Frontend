@@ -12,11 +12,11 @@ const ToDo = (props) => {
                             <div style={{display: "inline"}} key = {choose.lp}>Lp {choose.lp}. Tekst: {choose.text}, Data: {choose.date}  </div>
                             <input 
                                 type = "button" 
-                                onClick = {event => props.deleteEvent(choose)}
+                                onClick = {() => props.deleteEvent(choose)}
                                 value ="Przycisk usuń"/>
                             <input
                                 type = "button" 
-                                onClick = {() => {choose.active = "activated"; props.addDone(choose)}}
+                                onClick = {() => {choose.active = "activated"; props.addDone()}}
                                 value ="Przycisk zakończ zadanie"/>
                         </div>)}
                 else{
