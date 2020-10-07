@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import ToDo from './to-do.js'
 
 
 const Formularz = () => {
@@ -28,9 +29,8 @@ const Formularz = () => {
     function addText_to_List(event) {
         let now = Date(Date.now()).split(' ')
         let compare = now[3]+"-"+months[now[1]]+"-"+ now[2]
-
         if(text !== "" && date !== "" && Date.parse(compare) < Date.parse(date)){
-            setList([...list, {text, date}]);
+            setList([...list, {lp: list.length !== 0 ? list[list.length-1]['lp'] + 1 : 1 ,text, date, active: "deactivated"}]);
             setDate("");
             setText("");
             setWarning_Date("");
@@ -51,17 +51,18 @@ const Formularz = () => {
         }
     }
 
+    function addDone(event){
+        event.active = "activated"
+    }
+
+    function deleteEvent(event){
+        let update = list.filter(a => a !== event)
+        setList(update)
+    }
 
 
     return(
         <div>
-            <div>
-                Lista TO-DO:
-                {list
-                .map(choose => (
-                <div  key = {choose.text}>{choose.text}, {choose.date}</div>
-                ))}
-            </div>
             <form>
                 <input 
                     type = "text"
@@ -78,6 +79,8 @@ const Formularz = () => {
                     onClick = {addText_to_List}
                     value ="Zatwierdz"/>
             </form>
+            Lista to-do:
+            <ToDo list = {list} deleteEvent = {deleteEvent} addDone = {addDone} />
         </div>
     )
 }
