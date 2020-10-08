@@ -80,7 +80,7 @@ function App() {
         <input 
           type = "text" 
           value = {border}
-          onChange = {(event) => {setBorder(event.target.value); setData(test)}}/>
+          onChange = {(event) => {setBorder(event.target.value); handleChange()}}/>
         <input 
           type = "button"
           value = "Zatwierdz Filtr"
