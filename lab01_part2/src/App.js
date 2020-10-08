@@ -2,15 +2,15 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import Kafelek from './kafelek.js'
 import './App.css';
+const _ = require('lodash');
+
 
 function App() {
   const [data, setData] = useState([])
   const [text, setText] = useState("")
   const [test, setTest] = useState(data)
   const [sort, setSort] = useState("nie odwrocone")
-  const sortBy = (key) => {
-    return (a, b) => (a[key] > b[key]) ? 1 : ((b[key] > a[key]) ? -1 : 0);
-};
+  const [border, setBorder] = useState("") 
 
 
   useEffect(() => {
@@ -18,19 +18,21 @@ function App() {
     .then(response => {
         setTest(response.data
         .map(response_product => {
-            const {name, flag} = response_product   
+            const {name, flag, borders} = response_product   
             const product = {
                 'name': name,
                 'flag': flag,
+                'borders': borders
             }
             return product;
         }))
         setData(response.data
           .map(response_product => {
-              const {name, flag} = response_product   
+              const {name, flag, borders} = response_product   
               const product = {
                   'name': name,
                   'flag': flag,
+                  'borders': borders
               }
               return product;
           }))
@@ -52,7 +54,7 @@ function App() {
 
   function handleSort(){
     if(sort === "nie odwrocone"){
-      setData(data.concat().sort(sortBy(['name'])))
+      setData(_.sortBy(data, ['name']))
       setSort("odwrocone")
     }
     else{
@@ -61,26 +63,40 @@ function App() {
     }
   }
 
+  function handleFiltr(){
+    setData(data.reduce((acc, current) => {
+      const wynik = current.borders.reduce((acc1, current1) => {
+        return (current1 === border.toUpperCase() ? [current1] : acc1)
+      },[])
+      return (wynik.length !== 0 ? [...acc, current] : acc)
+    },[]));
+  }
+
 
 
   return (
     <div>
       <form>
         <input 
+          type = "text" 
+          value = {border}
+          onChange = {(event) => {setBorder(event.target.value); setData(test)}}/>
+        <input 
+          type = "button"
+          value = "Zatwierdz Filtr"
+          onClick = {() => handleFiltr()}/>
+        <input 
           type = "text"
           value = {text}
-          onChange = {(event) => {setText(event.target.value); setData(test)}}
-          />
+          onChange = {(event) => {setText(event.target.value); setData(test)}}/>
         <input
           type = "button"
           value = "Zatwierdz"
-          onClick = {() => handleChange()}
-          />
+          onClick = {() => handleChange()}/>
         <input
           type = "button"
           value = "Sortuj"
-          onClick = {() => handleSort()}
-          />
+          onClick = {() => handleSort()}/>
       </form>
       <div style={mydiv}>
         {data.map(country => (
