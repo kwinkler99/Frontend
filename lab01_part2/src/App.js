@@ -12,6 +12,7 @@ function App() {
   const [sort, setSort] = useState("nie odwrocone")
   const [border, setBorder] = useState("") 
   const [currencies, setCurrencies] = useState([])
+  const [edit, setEdit] = useState("none")
 
 
   useEffect(() => {
@@ -19,51 +20,31 @@ function App() {
     .then(response => {
         setTest(response.data
         .map(response_product => {
-            const {name, flag, borders} = response_product   
+            const {name, flag, borders, currencies} = response_product   
             const product = {
                 'name': name,
                 'flag': flag,
-                'borders': borders
+                'borders': borders,
+                'currencies': currencies
             }
             return product;
         }))
         setData(response.data
           .map(response_product => {
-              const {name, flag, borders} = response_product   
+              const {name, flag, borders, currencies} = response_product   
               const product = {
                   'name': name,
                   'flag': flag,
-                  'borders': borders
+                  'borders': borders,
+                  'currencies': currencies
               }
               return product;
           }))
-
-        const temp = response.data
-        .map(current => {
-          const result = current.currencies.reduce((acc, curr) => {   //curr to objekt w currencies, acc tablica z nazwami walut
-            const result1 = acc.reduce((acc1,curr1) => { //curr1 to nazwa waluty
-              console.log(curr1, curr.name, acc)
-              if (curr1 === curr.name){
-                return {status: true, currenc: ""}
-              }
-              else{
-                return acc1
-              }
-            },{status: false, currenc: curr.name})
+        setCurrencies(_.union(_.flatten(
+          response.data
+          .map(current => {
+            return current.currencies.map((curr) => curr.name)}))))
             
-            if (result1.status === false){
-              return [...acc, curr.name]
-            }
-            else{ 
-              return acc
-            } 
-          },[])
-
-          return result
-        })
-
-
-        setCurrencies(temp)
         return response;
     })
     .catch(error => console.log(error));
@@ -78,6 +59,7 @@ function App() {
   function handleChange(){
     setData(test.filter(a => a.name.toLowerCase().startsWith(text)))
     setSort("nie odwrocone")
+    setEdit("none")
   }
 
   function handleSort(){
@@ -92,12 +74,31 @@ function App() {
   }
 
   function handleFiltr(){
-    setData(data.reduce((acc, current) => {
+    if(border.length > 0){
+      setData(data.reduce((acc, current) => {
+        const wynik = current.borders.reduce((acc1, current1) => {
+          return (current1 === border.toUpperCase() ? [current1] : acc1)
+        },[])
+        return (wynik.length !== 0 ? [...acc, current] : acc)
+      },[]));
+    }
+  }
+
+  function handleCurr(event){
+    setEdit(event.target.value)
+    setData(test.filter(a => a.name.toLowerCase().startsWith(text)).reduce((acc, current) => {
       const wynik = current.borders.reduce((acc1, current1) => {
         return (current1 === border.toUpperCase() ? [current1] : acc1)
       },[])
-      return (wynik.length !== 0 ? [...acc, current] : acc)
-    },[]));
+      const wynik1 = current.currencies.reduce((acc1, current1) => {
+        return (current1.name === event.target.value ? [current1] : acc1)
+      },[])
+      if (border.length>0){
+        return (wynik1.length !== 0 && wynik.length !== 0 ? [...acc, current] : acc)}
+      else{
+        return (wynik1.length !== 0? [...acc, current] : acc)}
+      },[]))
+    
   }
 
 
@@ -115,7 +116,8 @@ function App() {
         <input 
           type = "text"
           value = {text}
-          onChange = {(event) => {setText(event.target.value); setData(test)}}/>
+          onChange = {(event) => {setText(event.target.value); setData(test)}}
+          onClick = {() => {setEdit("none"); setBorder(""); setText(""); setData(test)}}/>
         <input
           type = "button"
           value = "Zatwierdz"
@@ -124,7 +126,8 @@ function App() {
           type = "button"
           value = "Sortuj"
           onClick = {() => handleSort()}/>
-        <select>
+        <select value = {edit} onChange = {(event) => handleCurr(event)}>
+          <option key = "none" value = "none">none</option>
           {currencies.map(currenc => (
             <option key = {currenc} value={currenc}>{currenc}</option>
           ))}
