@@ -11,6 +11,7 @@ function App() {
   const [test, setTest] = useState(data)
   const [sort, setSort] = useState("nie odwrocone")
   const [border, setBorder] = useState("") 
+  const [currencies, setCurrencies] = useState([])
 
 
   useEffect(() => {
@@ -36,6 +37,33 @@ function App() {
               }
               return product;
           }))
+
+        const temp = response.data
+        .map(current => {
+          const result = current.currencies.reduce((acc, curr) => {   //curr to objekt w currencies, acc tablica z nazwami walut
+            const result1 = acc.reduce((acc1,curr1) => { //curr1 to nazwa waluty
+              console.log(curr1, curr.name, acc)
+              if (curr1 === curr.name){
+                return {status: true, currenc: ""}
+              }
+              else{
+                return acc1
+              }
+            },{status: false, currenc: curr.name})
+            
+            if (result1.status === false){
+              return [...acc, curr.name]
+            }
+            else{ 
+              return acc
+            } 
+          },[])
+
+          return result
+        })
+
+
+        setCurrencies(temp)
         return response;
     })
     .catch(error => console.log(error));
@@ -73,7 +101,6 @@ function App() {
   }
 
 
-
   return (
     <div>
       <form>
@@ -97,6 +124,11 @@ function App() {
           type = "button"
           value = "Sortuj"
           onClick = {() => handleSort()}/>
+        <select>
+          {currencies.map(currenc => (
+            <option key = {currenc} value={currenc}>{currenc}</option>
+          ))}
+        </select>
       </form>
       <div style={mydiv}>
         {data.map(country => (

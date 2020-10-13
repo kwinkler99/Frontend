@@ -19,7 +19,7 @@ const Kafelek = (props) => {
     return(
         <div key = {props.props.name} style = {myborder}>
             <img style = {myimage} src = {props.props.flag} alt = {props.props.flag}/>
-            <div style = {{float: "left"}}>{props.props.name}</div>
+            <div style = {{float: "left-bottom"}}>{props.props.name}</div>
         </div>
     )
 }
