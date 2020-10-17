@@ -1,27 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
+import './kafelek.css';
 
 
-const Kafelek = (props) => {
+class Kafelek extends Component{
     
-    const myimage = {
-        width: "150px",
-        margin: "auto",
-        padding: "10px"
+    render() {
+        return(
+            <div id="border" key={this.props.name}>
+                <img id="img" src={this.props.flag} alt={this.props.flag}/>
+                <div style = {{float: "left-bottom"}}>{this.props.name}</div>
+            </div>
+        )
     }
-
-    const myborder = {
-        border: "1px solid",
-        padding: "10px",
-        margin: "10px"
-    }
-
-
-    return(
-        <div key = {props.props.name} style = {myborder}>
-            <img style = {myimage} src = {props.props.flag} alt = {props.props.flag}/>
-            <div style = {{float: "left-bottom"}}>{props.props.name}</div>
-        </div>
-    )
 }
 
 

@@ -14,47 +14,55 @@ function App() {
   const [currencies, setCurrencies] = useState([])
   const [edit, setEdit] = useState("none")
 
+  function save (res_prod) {
+    const {name, flag, borders, currencies} = res_prod
+    const product = {
+        'name': name,
+        'flag': flag,
+        'borders': borders,
+        'currencies': currencies
+    }
+    return product;
+  }
+
+
+  function bor(curr){
+    const result = curr.borders.reduce((acc, current) => {
+      return (current === border.toUpperCase() ? [current] : acc)
+    },[])
+    return result
+  }
+
+  function cur(curr, event){
+    const result = curr.currencies.reduce((acc1, current1) => {
+      return (current1.name === event.target.value ? [current1] : acc1)
+    },[])
+    return result
+  }
 
   useEffect(() => {
     axios.get('https://restcountries.eu/rest/v2')
     .then(response => {
+
         setTest(response.data
         .map(response_product => {
-            const {name, flag, borders, currencies} = response_product   
-            const product = {
-                'name': name,
-                'flag': flag,
-                'borders': borders,
-                'currencies': currencies
-            }
-            return product;
+            return save(response_product)
         }))
+
         setData(response.data
           .map(response_product => {
-              const {name, flag, borders, currencies} = response_product   
-              const product = {
-                  'name': name,
-                  'flag': flag,
-                  'borders': borders,
-                  'currencies': currencies
-              }
-              return product;
+            return save(response_product)
           }))
+
         setCurrencies(_.union(_.flatten(
           response.data
           .map(current => {
             return current.currencies.map((curr) => curr.name)}))))
-            
+        
         return response;
     })
     .catch(error => console.log(error));
   },[]);
-
-  const mydiv = {
-    display: "grid",
-    gridTemplateColumns: "auto auto auto",
-    padding: "10px",
-  };
 
   function handleChange(){
     setData(test.filter(a => a.name.toLowerCase().startsWith(text)))
@@ -76,10 +84,7 @@ function App() {
   function handleFiltr(){
     if(border.length > 0){
       setData(data.reduce((acc, current) => {
-        const wynik = current.borders.reduce((acc1, current1) => {
-          return (current1 === border.toUpperCase() ? [current1] : acc1)
-        },[])
-        return (wynik.length !== 0 ? [...acc, current] : acc)
+        return (bor(current).length !== 0 ? [...acc, current] : acc)
       },[]));
     }
   }
@@ -87,16 +92,10 @@ function App() {
   function handleCurr(event){
     setEdit(event.target.value)
     setData(test.filter(a => a.name.toLowerCase().startsWith(text)).reduce((acc, current) => {
-      const wynik = current.borders.reduce((acc1, current1) => {
-        return (current1 === border.toUpperCase() ? [current1] : acc1)
-      },[])
-      const wynik1 = current.currencies.reduce((acc1, current1) => {
-        return (current1.name === event.target.value ? [current1] : acc1)
-      },[])
       if (border.length>0){
-        return (wynik1.length !== 0 && wynik.length !== 0 ? [...acc, current] : acc)}
+        return (cur(current, event).length !== 0 && bor(current).length !== 0 ? [...acc, current] : acc)}
       else{
-        return (wynik1.length !== 0? [...acc, current] : acc)}
+        return (cur(current, event).length !== 0? [...acc, current] : acc)}
       },[]))
     
   }
@@ -133,9 +132,9 @@ function App() {
           ))}
         </select>
       </form>
-      <div style={mydiv}>
+      <div id="myDiv">
         {data.map(country => (
-          <Kafelek key = {country.name} props = {country}/>
+          <Kafelek key = {country.name} {...country}/>
         ))}
       </div>
     </div>
