@@ -8,46 +8,68 @@ class Count extends Component {
         super(props)
 
         this.state = {
-            items: [
-                {number: 0, key:0}
-            ],
+            items: []
         }
 
-        this.addOne = this.addOne.bind(this)
-        this.addOne = this.removeOne.bind(this)
         this.addToList = this.addToList.bind(this)
         this.deleteItem = this.deleteItem.bind(this)
+        this.increase = this.increase.bind(this)
+        this.decrease = this.decrease.bind(this)
     }
 
     addToList(event){
-        let numberArray = this.state.items
-        numberArray.push({     
-            key: this.state.key + 1,                  
+        let arr = this.state.items
+        arr.push({  
             number: 0, 
+            key: arr[arr.length - 1] ? (arr[arr.length - 1].key + 1) : 0,                  
         })
         this.setState({
-            items: numberArray
+            items: arr
         })
 
         event.preventDefault();
     }
 
-    addOne(){
-        //dodawanie
+    deleteItem(key){
+        let filterArray = this.state.items.filter(function(item){
+            return(item.key !== key)
+        })
+        this.setState({
+            items: filterArray
+        })
     }
 
-    removeOne(){
-        //odejmowanie
+    increase(key){
+        let increaseArray = this.state.items
+        let changeArray = increaseArray.map(function(item){
+            if(item.key === key){
+                    item.number += 1
+            }
+            return item 
+        })
+
+        this.setState({
+            items: changeArray
+        })
+
     }
 
-    deleteItem(item){
-        console.log(item)
-        // let numberArray = this.state.items.filter(function(e){
-        //     return(e.key !== item.key)
-        // })
-        // this.setState({
-        //     items: numberArray
-        // })
+    decrease(key){
+        let decreaseArray = this.state.items
+        let changeArray = decreaseArray.map(function(item){
+            if(item.key === key){
+                    item.number -= 1
+            }
+            return item 
+        })
+
+        this.setState({
+            items: changeArray
+        })
+
+
+
+
     }
 
     render(){
@@ -62,7 +84,7 @@ class Count extends Component {
                         <button type="submit">Dodaj licznik</button> 
                     </form>
                 </div>
-                <NumberList delete={this.deleteItem} list={this.state.items} addOne={this.addOne} removeOne={this.removeOne}/>
+                <NumberList increase={this.increase} decrease={this.decrease} delete={this.deleteItem} list={this.state.items}/>
             </div>
         )
 
