@@ -1,0 +1,24 @@
+body{
+    background-color: #73aadde0;
+    font-size: 20px;
+    font-family: sans-serif;
+}
+#root{
+    display: flex;
+    justify-content: center;
+}
+.counter form button{
+    width: auto;
+    padding:20px;
+    background-color: #8b9adf;
+    border: 2px solid #8b9adf;
+}
+.counter{
+    background-color: #8ac2e7;
+    padding: 20px;
+    margin: 20px;
+}
+.counter p{
+    display: flex;
+    justify-content: center;
+}

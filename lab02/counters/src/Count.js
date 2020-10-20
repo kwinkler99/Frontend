@@ -15,6 +15,7 @@ class Count extends Component {
         this.deleteItem = this.deleteItem.bind(this)
         this.increase = this.increase.bind(this)
         this.decrease = this.decrease.bind(this)
+        this.addNumber = this.addNumber.bind(this)
     }
 
     addToList(event){
@@ -67,24 +68,44 @@ class Count extends Component {
             items: changeArray
         })
 
+    }
+
+
+    addNumber(num, key){
+
+        let changeArray = this.state.items
+        let newArray = changeArray.map(function(item) {
+            if(item.key === key){
+                console.log(parseInt(num))
+                console.log(parseInt(item.number))
+                let new_num = parseInt(num) + item.number
+                item.number = new_num
+                  
+            }          
+            return item
+        })
+        console.log(newArray)
+
+        this.setState({
+            items: newArray
+        })
 
 
 
     }
 
+
+
     render(){
         return(
             <div>
-                <div>
+                <div className="counter">
                     <p>Counter:</p>
                     <form onSubmit={this.addToList}>
-                        {/* <input typ="text" ref={(a) => this._inputNumber = a}
-                            placeholder="Wpisz liczbe">   
-                        </input> */}
                         <button type="submit">Dodaj licznik</button> 
                     </form>
                 </div>
-                <NumberList increase={this.increase} decrease={this.decrease} delete={this.deleteItem} list={this.state.items}/>
+                <NumberList increase={this.increase} addNumber={this.addNumber} decrease={this.decrease} delete={this.deleteItem} list={this.state.items}/>
             </div>
         )
 
