@@ -1,6 +1,6 @@
 body{
     background-color: #73aadde0;
-    font-size: 20px;
+    font-size: 30px;
     font-family: sans-serif;
 }
 #root{
@@ -8,10 +8,11 @@ body{
     justify-content: center;
 }
 .counter form button{
-    width: auto;
+    font-size: 20px;
+    width: 600px;
     padding:20px;
-    background-color: #8b9adf;
-    border: 2px solid #8b9adf;
+    background-color: #285e8a;
+    border: 2px solid #285e8a;
 }
 .counter{
     background-color: #8ac2e7;

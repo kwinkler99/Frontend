@@ -16,13 +16,15 @@ class Count extends Component {
         this.increase = this.increase.bind(this)
         this.decrease = this.decrease.bind(this)
         this.addNumber = this.addNumber.bind(this)
+        this.changeText = this.changeText.bind(this)
     }
 
     addToList(event){
         let arr = this.state.items
         arr.push({  
             number: 0, 
-            key: arr[arr.length - 1] ? (arr[arr.length - 1].key + 1) : 0,                  
+            key: arr[arr.length - 1] ? (arr[arr.length - 1].key + 1) : 0,
+            text: ""                  
         })
         this.setState({
             items: arr
@@ -71,29 +73,36 @@ class Count extends Component {
     }
 
 
-    addNumber(num, key){
-
+    addNumber(key){
         let changeArray = this.state.items
         let newArray = changeArray.map(function(item) {
-            if(item.key === key){
-                console.log(parseInt(num))
-                console.log(parseInt(item.number))
-                let new_num = parseInt(num) + item.number
-                item.number = new_num
-                  
+            if(item.key === key && item.text !== "" && !isNaN(parseInt(item.text))){
+                item.number += parseInt(item.text) 
+                item.text = ""                
             }          
             return item
         })
-        console.log(newArray)
 
         this.setState({
             items: newArray
         })
-
-
-
     }
 
+
+
+
+    changeText(txt, key){
+        let txtArray = this.state.items
+        let newArray = txtArray.map(function(item) {
+            if(item.key === key){
+                item.text = txt                 
+            }          
+            return item
+        })
+        this.setState({
+            items: newArray
+        })
+    }
 
 
     render(){
@@ -105,7 +114,9 @@ class Count extends Component {
                         <button type="submit">Dodaj licznik</button> 
                     </form>
                 </div>
-                <NumberList increase={this.increase} addNumber={this.addNumber} decrease={this.decrease} delete={this.deleteItem} list={this.state.items}/>
+                <NumberList increase={this.increase} addNumber={this.addNumber} 
+                            decrease={this.decrease} delete={this.deleteItem} 
+                            list={this.state.items} changeText={this.changeText}/>
             </div>
         )
 

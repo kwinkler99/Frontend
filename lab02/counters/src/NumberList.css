@@ -1,17 +1,20 @@
-.List{
+.List li{
     list-style: none;
     display: inline;
+    margin: 20px;
+    Display: table;
 
 }
 
-.List li{
+.List {
     transition: background-color .2s ease-out;
 }
 
 .List input{
+    font-size: 20px;
     padding: 20px;
-    background-color: #8b9adf;
-    border: 2px solid #8b9adf;
+    background-color: #285e8a;
+    border: 2px solid #285e8a;
 }
 
 .List input.text{

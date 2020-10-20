@@ -13,6 +13,7 @@ class NumberList extends Component {
         this.increase = this.increase.bind(this)
         this.decrease = this.decrease.bind(this)
         this.addNumber = this.addNumber.bind(this)
+        this.changeText = this.changeText.bind(this)
     }
 
     increase(key){
@@ -28,37 +29,36 @@ class NumberList extends Component {
     }
 
 
-    addNumber(key, num){
-        this.props.addNumber(num, key)
-        this._inputNumber.value = ""
+    addNumber(key){
+        this.props.addNumber(key)
+    }
+
+    changeText(value, key){
+        this.props.changeText(value, key)
+        this._inputElement = ""
     }
 
 
 
-
-
     createList(item){
-        return(<div className = "List">
-                <FlipMove duration={250} easing="ease-out">
-                    <li key={item.key}>{item.number}
-                        <div>
-                            <input type="button" value="+"
-                            onClick={() => this.increase(item.key)}/>
-                            <input type="button" value="-" 
-                            onClick={() => this.decrease(item.key)}/>
-                            <input className="text" typ="text" ref={(a) => this._inputNumber = a}
-                                    placeholder="Wpisz liczbe"/>
-                            <input type="button" value="Dodaj"
-                                onClick={() => this.addNumber(item.key, this._inputNumber)}/>
-                            <input type="button" value="Usuń"
-                                onClick={() => this.delete(item.key)}/>
-                        </div> 
-                    </li>
-                </FlipMove>          
-
-                    
-                    
-              </div>)
+        return(
+            <div key={item.key} className = "List">
+                <li key={item.key}>{item.number}</li>
+                <input type="button" value="+"
+                       onClick={() => this.increase(item.key)}/>
+                <input type="button" value="-" 
+                       onClick={() => this.decrease(item.key)}/>
+                <input className="text" typ="text" 
+                       value = {item.text}
+                       onChange={(e) => this.changeText(e.target.value, item.key)}
+                       placeholder="Wpisz liczbe"/>
+                <input type="button" value="Dodaj"
+                       onClick={() => this.addNumber(item.key)}/>
+                <input type="button" value="Usuń"
+                       onClick={() => this.delete(item.key)}/>
+            </div> 
+                
+        )
     }
 
 
@@ -70,7 +70,9 @@ class NumberList extends Component {
 
         return(
             <ul>
-                {toDoListItems}
+                <FlipMove duration={250} easing="ease-out">
+                    {toDoListItems}
+                </FlipMove>          
             </ul>
         )
     }
