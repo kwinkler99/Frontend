@@ -1,0 +1,16 @@
+.active{
+    opacity: 1;
+    position: fixed;
+    left: 50%;
+    top: 30px;
+    transform: translate(-50%);
+    background-color: rgb(166, 138, 189);
+    border-radius: 10px;
+    height: 450px;
+    width: 800px;
+    font-size: 50px;
+}
+
+.active input{
+    font-size: 20px;
+}
