@@ -31,15 +31,15 @@ const Formularz = () => {
         let new_test = now.toLocaleDateString().split(".")
 
         if(text !== "" && date !== ""){
-            if(new_date[2]>=new_test[2]){
+            if(new_date[2]>new_test[2]){
                 setActive("active")
             }
             else if(new_date[2] === new_test[2]){
-                if(new_date[1]>=new_test[1]){
+                if(new_date[1]>new_test[1]){
                     setActive("active")
                 }
                 else if(new_date[1] === new_test[1]){
-                    if(new_date[0]>=new_test[0]){
+                    if(new_date[0]>new_test[0]){
                         setActive("active")
                     }
                     else{
