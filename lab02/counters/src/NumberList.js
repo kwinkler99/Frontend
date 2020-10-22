@@ -10,18 +10,18 @@ class NumberList extends Component {
 
         this.createList = this.createList.bind(this);
         this.delete = this.delete.bind(this);
-        this.increase = this.increase.bind(this)
-        this.decrease = this.decrease.bind(this)
+        this.increment = this.increment.bind(this)
+        this.decrement = this.decrement.bind(this)
         this.addNumber = this.addNumber.bind(this)
         this.changeText = this.changeText.bind(this)
     }
 
-    increase(key){
-        this.props.increase(key)
+    increment(key){
+        this.props.increment(key)
     }
 
-    decrease(key){
-        this.props.decrease(key)
+    decrement(key){
+        this.props.decrement(key)
     }
 
     delete(key){
@@ -45,9 +45,9 @@ class NumberList extends Component {
             <div key={item.key} className = "List">
                 <li key={item.key}>{item.number}</li>
                 <input type="button" value="+"
-                       onClick={() => this.increase(item.key)}/>
+                       onClick={() => this.increment(item.key)}/>
                 <input type="button" value="-" 
-                       onClick={() => this.decrease(item.key)}/>
+                       onClick={() => this.decrement(item.key)}/>
                 <input className="text" typ="text" 
                        value = {item.text}
                        onChange={(e) => this.changeText(e.target.value, item.key)}

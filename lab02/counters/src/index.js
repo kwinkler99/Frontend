@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Count from './Count.js';
+import Store from './Store.js';
 import './index.css'
 
 ReactDOM.render(
-    <Count />,
+    <Store />,
     document.getElementById("root")
 );
