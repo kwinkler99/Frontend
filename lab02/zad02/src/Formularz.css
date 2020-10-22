@@ -1,6 +1,7 @@
 .container{
     width: 800px;
     text-align: center;
+    
 }
 .special_text{
     font-size: 40px;
@@ -13,7 +14,7 @@
 
 }
 .menu{
-    background-color: rgb(77, 96, 158);
+    background-color: rgb(47, 119, 65);
     border-radius: 10px;
 
 }
@@ -33,11 +34,11 @@
     background-color: rgb(116, 165, 116);
     border: 2px rgb(116, 165, 116);
     height: 60px;
-    width: 200px;
+    width: 210px;
 }
 
 .box1:hover{
-    background-color: rgb(46, 114, 46)
+    background-color: rgb(26, 65, 26)
 }
 
 .menu p{

@@ -68,7 +68,7 @@ class ToDo extends Component {
 
     render(){
         return(
-            <div>
+            <div className = "listToDo">
                 <FlipMove duration={250} easing="ease-out">
                     {this.props.list
                     .map(choose =>
@@ -80,7 +80,8 @@ class ToDo extends Component {
                                         Lp {choose.lp}. 
                                         Tekst: {choose.text}, 
                                         Data: {choose.date} , 
-                                        Godzina: {choose.hour}  </div>
+                                        Godzina: {choose.hour}, 
+                                        Status: {choose.active}</div>
                                     <input 
                                         type = "button" 
                                         onClick = {() => this.props.deleteEvent(choose)}
@@ -97,7 +98,8 @@ class ToDo extends Component {
                                     Lp {choose.lp}. 
                                     Tekst: {choose.text}, 
                                     Data: {choose.date}, 
-                                    Godzina: {choose.hour}</div>)
+                                    Godzina: {choose.hour}, 
+                                    Status: {choose.active}</div>)
                         }
                         else{
                             return (
@@ -105,7 +107,8 @@ class ToDo extends Component {
                                     Lp {choose.lp}. 
                                     Tekst: {choose.text}, 
                                     Data: {choose.date}, 
-                                    Godzina: {choose.hour}</div>)
+                                    Godzina: {choose.hour}, 
+                                    Status: {choose.active}</div>)
                         }
                     })}
                     

@@ -31,15 +31,15 @@ const Formularz = () => {
         let new_test = now.toLocaleDateString().split(".")
 
         if(text !== "" && date !== ""){
-            if(new_date[2]>new_test[2]){
+            if(new_date[2]>=new_test[2]){
                 setActive("active")
             }
             else if(new_date[2] === new_test[2]){
-                if(new_date[1]>new_test[1]){
+                if(new_date[1]>=new_test[1]){
                     setActive("active")
                 }
                 else if(new_date[1] === new_test[1]){
-                    if(new_date[0]>new_test[0]){
+                    if(new_date[0]>=new_test[0]){
                         setActive("active")
                     }
                     else{
@@ -89,15 +89,20 @@ const Formularz = () => {
 
 
     function changeActive(change){
-        let date_new = Moment(date).format('DD.MM.YYYY')
-        setActive(change)
-        setList([...list, {lp: list.length !== 0 ? list[list.length-1]['lp'] + 1 : 1 ,text, date: date_new, hour: dateTo,  active: "Todo"}]);
-        setCopyList([...list, {lp: list.length !== 0 ? list[list.length-1]['lp'] + 1 : 1 ,text, date: date_new, hour: dateTo,  active: "Todo"}])
-        setDateTo("")
-        setDate("");
-        setText("");
-        setWarning_Date("");
-        setWarning_Text("");
+        if(dateTo !== ""){
+            let date_new = Moment(date).format('DD.MM.YYYY')
+            setActive(change)
+            setList([...list, {lp: list.length !== 0 ? list[list.length-1]['lp'] + 1 : 1 ,text, date: date_new, hour: dateTo,  active: "Todo"}]);
+            setCopyList([...list, {lp: list.length !== 0 ? list[list.length-1]['lp'] + 1 : 1 ,text, date: date_new, hour: dateTo,  active: "Todo"}])
+            setDateTo("")
+            setDate("");
+            setText("");
+            setWarning_Date("");
+            setWarning_Text("");
+        }
+        else{
+            setActive("active")
+        }
     }
 
 
