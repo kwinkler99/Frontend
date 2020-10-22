@@ -84,6 +84,7 @@ const Formularz = () => {
     function deleteEvent(event){
         let update = list.filter(a => a !== event)
         setList(update)
+        setCopyList(update)
     }
 
 
