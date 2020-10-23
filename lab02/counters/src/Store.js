@@ -6,13 +6,14 @@ import Count from './Count.js'
 const reduce = (state, action) => {
     switch (action.type){
         case 'addNew':
-            return {items: [...state, action.new_item]};
+            return [...state, action.new_item];
         case 'addNumber':
             return state.map(element => {
                 if(element.key === action.key){
                     return {
                         ...element,
-                        number: element.number + action.number
+                        number: element.number + action.number,
+                        text: ""
                     }
                 }
                 return element           
@@ -30,7 +31,6 @@ const reduce = (state, action) => {
                 return element           
             })
         case 'DECREMENT':
-            console.log(state)
             return state.map(element => {
                 if(element.key === action.key){
                     return {
@@ -39,6 +39,16 @@ const reduce = (state, action) => {
                     }
                 }
                 return element           
+            })
+        case 'TEXT':
+            return state.map(element => {
+                if(element.key === action.key){
+                    return {
+                        ...element,
+                        text: action.txt
+                    }
+                }
+                return element  
             })
         case 'START':
             return state;
@@ -51,14 +61,22 @@ class Store extends Component {
         super(props)
 
         this.state = {
-            counter: 0
+            immutableState: reduce([], {type: 'START'})
         }
+
+        this.setImmutableState = this.setImmutableState.bind(this)
+    }
+
+    setImmutableState(action){
+        this.setState({
+            immutableState: reduce(this.state.immutableState, action)
+        })
     }
 
     render(){
         return(
             <div>
-                <Count reduce={reduce}/>
+                <Count immutableState={this.state.immutableState} setImmutableState={this.setImmutableState}/>
             </div>
         )
     }

@@ -7,10 +7,6 @@ class Count extends Component {
     constructor(props){
         super(props)
 
-        this.state = {
-            items: []
-        }
-
         this.addToList = this.addToList.bind(this)
         this.deleteItem = this.deleteItem.bind(this)
         this.increment = this.increment.bind(this)
@@ -20,82 +16,39 @@ class Count extends Component {
     }
 
     addToList(event){
-        let arr = this.state.items
+        let arr = this.props.immutableState
         let temp_obj={
             number: 0, 
             key: arr[arr.length - 1] ? (arr[arr.length - 1].key + 1) : 0,
             text: ""
         }
-        this.props.reduce(this.state.items, {type: 'addNew', new_item: temp_obj})
-        
-        arr.push(temp_obj)    
-        this.setState({
-            items: arr
-        })
 
         event.preventDefault();
+        this.props.setImmutableState({type: 'addNew', new_item: temp_obj})
     }
 
     deleteItem(key){
-        let filterArray = this.state.items.filter(function(item){
-            return(item.key !== key)
-        })
-        this.setState({
-            items: filterArray
-        })
-
-        this.props.reduce(this.state.items, {type: 'DELETE', key: key})
+        this.props.setImmutableState({type: 'DELETE', key: key})
     }
 
     increment(key){
-        this.props.reduce(this.state.items, {type: 'INCREMENT', key: key})
-
-        let incrementArray = this.state.items
-        let changeArray = incrementArray.map(function(item){
-            if(item.key === key){
-                    item.number += 1
-            }
-            return item 
-        })
-        this.setState({
-            items: changeArray
-        })
-
+        this.props.setImmutableState({type: 'INCREMENT', key: key})
     }
 
     decrement(key){
-        this.props.reduce(this.state.items, {type: 'DECREMENT', key: key})
-        
-        let decrementArray = this.state.items
-        let changeArray = decrementArray.map(function(item){
-            if(item.key === key){
-                    item.number -= 1
-            }
-            return item 
-        })
-        this.setState({
-            items: changeArray
-        })
-
+        this.props.setImmutableState({type: 'DECREMENT', key: key})
     }
 
 
     addNumber(key){
-        let reduce = this.props.reduce
-        let items = this.state.items
-        let changeArray = this.state.items
-        let newArray = changeArray.map(function(item) {
+        let reduce = this.props.setImmutableState
+        this.props.immutableState.map(function(item) {
             if(item.key === key && item.text !== "" && !isNaN(parseInt(item.text))){
-                reduce(items, {type: 'addNumber', key: key, number: parseInt(item.text)})
+                reduce({type: 'addNumber', key: key, number: parseInt(item.text)})
                 item.number += parseInt(item.text) 
                 item.text = ""                
             }          
             return item
-        })
-
-
-        this.setState({
-            items: newArray
         })
     }
 
@@ -103,16 +56,7 @@ class Count extends Component {
 
 
     changeText(txt, key){
-        let txtArray = this.state.items
-        let newArray = txtArray.map(function(item) {
-            if(item.key === key){
-                item.text = txt                 
-            }          
-            return item
-        })
-        this.setState({
-            items: newArray
-        })
+        this.props.setImmutableState({type: 'TEXT', key: key, txt: txt})
     }
 
 
@@ -127,7 +71,7 @@ class Count extends Component {
                 </div>
                 <NumberList increment={this.increment} addNumber={this.addNumber} 
                             decrement={this.decrement} delete={this.deleteItem} 
-                            list={this.state.items} changeText={this.changeText}/>
+                            list={this.props.immutableState} changeText={this.changeText}/>
             </div>
         )
 

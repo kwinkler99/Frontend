@@ -64,7 +64,6 @@ class NumberList extends Component {
 
 
     render(){
-
         let listItems = this.props.list
         let toDoListItems = listItems.map(this.createList) 
 
