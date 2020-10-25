@@ -41,7 +41,8 @@ const reduce = (state, action) => {
             }
         case 'START':
             return state
-        
+        default:
+            //do nothing    
     }
 }
 
