@@ -5,11 +5,10 @@ import './Formularz.css'
 import Moment from 'moment';
 
 
-const Formularz = () => {
+const Formularz = (props) => {
 
     const [timer, setTimer] = useState("")
     const [text, setText] = useState("");
-    const [list, setList] = useState([]);
     const [reload, setReload] = useState("");
     const [date, setDate] = useState("");
     const [warning_date, setWarning_Date] = useState("");
@@ -17,15 +16,13 @@ const Formularz = () => {
     const [dateTo, setDateTo] = useState("")
     const [active, setActive] = useState("inactive")
     const [textFilter, setTextFilter] = useState("")
-    const [copyList, setCopyList] = useState([])
     const [box, setBox] = useState("All")
     const activity = ['Done', 'Todo', 'Expired']
-    function filter(event) {return copyList.filter(item => item.text.toLowerCase().startsWith(event.toLowerCase()))}
         
 
 
 
-    function addText_to_List(event) {
+    function addText_to_List() {
         let now = new Date()
         let new_date = Moment(date).format('DD.MM.YYYY').split(".")
         let new_test = now.toLocaleDateString().split(".")
@@ -77,23 +74,22 @@ const Formularz = () => {
         else{
             setReload("reload")
         }
-        setCopyList(list)
     }
 
 
     function deleteEvent(event){
-        let update = list.filter(a => a !== event)
-        setList(update)
-        setCopyList(update)
+        props.reduce({type: 'DELETE', lp: event.lp})
     }
 
 
     function changeActive(change){
         if(dateTo !== ""){
             let date_new = Moment(date).format('DD.MM.YYYY')
+            let add = {lp: props.copyState.length !== 0 ? props.copyState[props.copyState.length-1]['lp'] + 1 : 1 ,text, date: date_new, hour: dateTo,  active: "Todo"}
+            props.reduce({type: 'ADD', add_new: add})
             setActive(change)
-            setList([...list, {lp: list.length !== 0 ? list[list.length-1]['lp'] + 1 : 1 ,text, date: date_new, hour: dateTo,  active: "Todo"}]);
-            setCopyList([...list, {lp: list.length !== 0 ? list[list.length-1]['lp'] + 1 : 1 ,text, date: date_new, hour: dateTo,  active: "Todo"}])
+            setBox("All")
+            setTextFilter("")
             setDateTo("")
             setDate("");
             setText("");
@@ -112,37 +108,22 @@ const Formularz = () => {
 
     
     function funtextFilter(event){
-        if (box !== "All"){
-            setList(filter(event).filter(function(item) {
-                return(item.active === box)
-            }))
-        }
-        else{
-            setList(filter(event))
-
-        }
+        props.reduce({type: 'FILTER', box: box, text: event})
         setTextFilter(event)
     }
 
     function activityFilter(event){
-        if (event !== "All"){
-            setList(filter(textFilter).filter(function(item) {
-                return(item.active === event)
-            }))
-        }
-        else{
-            setList(filter(textFilter))
-
-        }
+        props.reduce({type: 'FILTER', box: event, text: textFilter})
         setBox(event)
-    }
-
-    function handleChange(){
-        setCopyList(list)
     }
 
     function funSetTimer(time){
         setTimer(time)
+    }
+
+    function changeStatus(status, item){
+        props.reduce({type: status, lp: item.lp})
+        setBox("All")
     }
 
     return(
@@ -183,16 +164,16 @@ const Formularz = () => {
             </div>
 
             <p className="special_text">Lista to-do:</p>
-            <ToDo   list = {list} 
+            <ToDo   list = {props.immutableState} 
                     deleteEvent = {deleteEvent} 
                     addDone = {addDone} 
                     active = {active}
                     dateTo = {dateTo}
                     funDateTo = {funDateTo}
                     changeActive = {changeActive}
-                    handleChange={handleChange}
                     setTimer={funSetTimer}
                     timer={timer}
+                    changeStatus={changeStatus}
                     />
         </div>
     )

@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Formularz from './Formularz.js'
+import Store from './Store.js'
 import './index.css'
 
 ReactDOM.render(
   <div>
-    <Formularz />
+    <Store />
   </div>,
   document.getElementById('root')
 );
