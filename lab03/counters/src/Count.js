@@ -64,7 +64,6 @@ class Count extends Component {
         return(
             <div>
                 <div className="counter">
-                    {console.log(this.props.value)}
                     <p>Counter:</p>
                     <form onSubmit={this.addToList}>
                         <button type="submit">Dodaj licznik</button> 

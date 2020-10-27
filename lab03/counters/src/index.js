@@ -8,7 +8,7 @@ import './index.css'
 
 const store = createStore(counter)
 
-ReactDOM.render(
+const render = () => ReactDOM.render(
     <Count 
         value={store.getState()}
         addNew={(new_add) => store.dispatch({ type: 'ADDNEW', new_item: new_add })}
@@ -19,3 +19,6 @@ ReactDOM.render(
         text={(key, txt) => store.dispatch({ type: 'TEXT', key: key, txt: txt })}/>,
     document.getElementById("root")
 );
+
+render()
+store.subscribe(render)

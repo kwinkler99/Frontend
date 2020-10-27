@@ -1,4 +1,8 @@
-export default (state = [], action) => {
+function counter(state, action){
+    if(state === undefined){
+        return []
+    }
+
     switch (action.type){
         case 'ADDNEW':
             return [...state, action.new_item];
@@ -49,4 +53,5 @@ export default (state = [], action) => {
             //do nothing  
   }
 }
-  
+
+export default counter
