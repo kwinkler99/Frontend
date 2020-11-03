@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Count from './Count.js';
-import {createStore} from 'redux'
+import { applyMiddleware, createStore } from 'redux'
+import { logger } from './logger.js'
 import counter from './reducer'
 import './index.css'
 
 
-const store = createStore(counter)
+const store = createStore(counter, applyMiddleware(logger))
 
 const render = () => ReactDOM.render(
     <Count 
