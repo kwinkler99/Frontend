@@ -56,6 +56,7 @@ class NumberList extends Component {
                        onClick={() => this.addNumber(item.key)}/>
                 <input type="button" value="Usuń"
                        onClick={() => this.delete(item.key)}/>
+                <input type="button" value="Stop"/>
             </div> 
                 
         )
