@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import Kafelek from './kafelek.js'
+import Kafelek from './kafelek.js';
 import './App.css';
 const _ = require('lodash');
 
@@ -33,9 +33,10 @@ function App() {
     return result
   }
 
+
   function cur(curr, event){
     const result = curr.currencies.reduce((acc1, current1) => {
-      return (current1.name === event.target.value ? [current1] : acc1)
+      return (current1.name === event ? [current1] : acc1)
     },[])
     return result
   }
@@ -64,11 +65,6 @@ function App() {
     .catch(error => console.log(error));
   },[]);
 
-  function handleChange(){
-    setData(test.filter(a => a.name.toLowerCase().startsWith(text)))
-    setSort("nie odwrocone")
-    setEdit("none")
-  }
 
   function handleSort(){
     if(sort === "nie odwrocone"){
@@ -82,22 +78,36 @@ function App() {
   }
 
   function handleFiltr(){
+    const filterData = test.filter(a => a.name.toLowerCase().includes(text))
     if(border.length > 0){
-      setData(data.reduce((acc, current) => {
+      const result = filterData.reduce((acc, current) => {
         return (bor(current).length !== 0 ? [...acc, current] : acc)
-      },[]));
+      },[])
+      handleCurr(result)
     }
+    else{
+      handleCurr(filterData)
+    }
+    
   }
 
-  function handleCurr(event){
-    setEdit(event.target.value)
-    setData(test.filter(a => a.name.toLowerCase().startsWith(text)).reduce((acc, current) => {
-      if (border.length>0){
-        return (cur(current, event).length !== 0 && bor(current).length !== 0 ? [...acc, current] : acc)}
+  function handleCurr(result){
+    setData(result.reduce((acc, current) => {
+      if(edit !== "none"){
+        return (cur(current, edit).length !== 0? [...acc, current] : acc)
+      }
       else{
-        return (cur(current, event).length !== 0? [...acc, current] : acc)}
-      },[]))
-    
+        return [...acc, current]
+      }},[]))
+
+  }
+
+  function Reset(){
+    setData(test)
+    setSort("nie odwrocone")
+    setText("")
+    setBorder("")
+    setEdit("none")
   }
 
 
@@ -107,30 +117,32 @@ function App() {
         <input 
           type = "text" 
           value = {border}
-          onChange = {(event) => {setBorder(event.target.value); handleChange()}}/>
-        <input 
-          type = "button"
-          value = "Zatwierdz Filtr"
-          onClick = {() => handleFiltr()}/>
+          placeholder = "Filtr po sąsiadach"
+          onChange = {(event) => {setBorder(event.target.value);}}/>
         <input 
           type = "text"
           value = {text}
-          onChange = {(event) => {setText(event.target.value); setData(test)}}
-          onClick = {() => {setEdit("none"); setBorder(""); setText(""); setData(test)}}/>
-        <input
-          type = "button"
-          value = "Zatwierdz"
-          onClick = {() => handleChange()}/>
+          placeholder = "Filtr po nazwie"
+          onChange = {(event) => setText(event.target.value)}/>        
+        <br/>
         <input
           type = "button"
           value = "Sortuj"
           onClick = {() => handleSort()}/>
-        <select value = {edit} onChange = {(event) => handleCurr(event)}>
+        <select value = {edit} onChange = {(event) => {setEdit(event.target.value)}}>
           <option key = "none" value = "none">none</option>
           {currencies.map(currenc => (
             <option key = {currenc} value={currenc}>{currenc}</option>
           ))}
-        </select>
+        </select><br/>
+        <input
+          type = "button"
+          value = "Zatwierdz"
+          onClick = {() => {handleFiltr()}}/>
+        <input 
+          type = "button"
+          value = "Resetuj dane"
+          onClick = {() => Reset()}/>
       </form>
       <div id="myDiv">
         {data.map(country => (
