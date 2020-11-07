@@ -34,7 +34,8 @@ function counter(state, action){
                 if(element.key === action.key){
                     return {
                         ...element,
-                        number: element.number - 1
+                        number: element.number - 1,
+                        active: "active"
                     }
                 }
                 return element           
@@ -49,6 +50,29 @@ function counter(state, action){
                 }
                 return element  
             })
+        case 'SET_INTERVAL':
+            return state.map(element => {
+                if(element.key === action.key){
+                    return {
+                        ...element,
+                        someInterval: action.payload
+                    }
+                }
+                return element  
+            })
+        case 'STOP_TIMER':
+            return state.map(element => {
+                if(element.key === action.key){
+                    clearInterval(element.someInterval)
+                    return {
+                        ...element,
+                        active: "inactive"
+                    }
+                }
+                return element  
+            })
+        case 'STOP':
+            return state
         default:
             //do nothing  
   }

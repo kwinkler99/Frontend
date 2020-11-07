@@ -1,9 +1,20 @@
 export const logger = store => next => action => {
-    if(action.type === "DECREMENT"){
-        setInterval(
-            () => next(action),
-            1000
-          );
+
+    if(action.type === "DECREMENT" && action.active === "inactive"){
+        const interval = setInterval(() => next(action), 1000)
+        store.dispatch({
+            type: "SET_INTERVAL",
+            payload: interval,
+            key: action.key
+        });
+    }
+
+    
+    if(action.type === 'STOP'){
+        store.dispatch({
+            type: "STOP_TIMER",
+            key: action.key
+        })
     }
 
 

@@ -16,8 +16,9 @@ const render = () => ReactDOM.render(
         addNumber={(key, num) => store.dispatch({ type: 'ADDNUMBER', key: key, number: num })}
         delete={(key) => store.dispatch({ type: 'DELETE', key: key })}
         increment={(key) => store.dispatch({ type: 'INCREMENT', key: key })}
-        decrement={(key) => store.dispatch({ type: 'DECREMENT', key: key })}
-        text={(key, txt) => store.dispatch({ type: 'TEXT', key: key, txt: txt })}/>,
+        decrement={(key, active) => store.dispatch({ type: 'DECREMENT', key: key, active: active })}
+        text={(key, txt) => store.dispatch({ type: 'TEXT', key: key, txt: txt })}
+        stop={(key) => store.dispatch({ type: "STOP", key: key })}/>,
     document.getElementById("root")
 );
 
