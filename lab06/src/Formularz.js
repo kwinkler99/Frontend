@@ -83,7 +83,7 @@ const Formularz = (props) => {
     function changeActive(change){
         if(dateTo !== ""){
             let date_new = Moment(date).format('DD.MM.YYYY');
-            let add = {lp: props.value.length !== 0 ? props.value[props.value.length-1]['lp'] + 1 : 1 ,text, date: date_new, hour: dateTo,  active: "Todo"};
+            let add = {lp: props.copyValue.length !== 0 ? props.copyValue[props.copyValue.length-1]['lp'] + 1 : 1 ,text, date: date_new, hour: dateTo,  active: "Todo"};
             props.add(add);
             setActive(change);
             setBox("All");

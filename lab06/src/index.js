@@ -11,7 +11,8 @@ const render = () => ReactDOM.render(
   <div>
     <Formularz 
       //copyState = { store.getState() } 
-      value = { store.getState().list } 
+      value = { store.getState().list }
+      copyValue = { store.getState().copyList } 
       add = { (add) => store.dispatch({ type: 'ADD', add_new: add })}
       delete = { (lp) => store.dispatch({type: 'DELETE', lp: lp })}
       expired = { (lp) => store.dispatch({ type: 'EXPIRED', lp: lp })}

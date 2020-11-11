@@ -10,7 +10,7 @@ const reduce = (state, action) => {
         case 'ADD':
             console.log(state)
             return {
-                list: [ ...state.list, action.add_new ],
+                list: [ ...state.copyList, action.add_new ],
                 copyList: [ ...state.copyList, action.add_new ]
             }
               
