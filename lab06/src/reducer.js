@@ -1,39 +1,83 @@
 const reduce = (state, action) => {
+    if(state === undefined){
+        return {
+            list: [],
+            copyList: []
+        }
+    }
+
     switch(action.type){
         case 'ADD':
-            return [...state, action.add_new]
+            console.log(state)
+            return {
+                list: [ ...state.list, action.add_new ],
+                copyList: [ ...state.copyList, action.add_new ]
+            }
+              
         case 'DELETE':
-            return state.filter(element => element.lp !== action.lp)
+            return {
+                list: state.list.filter(element => element.lp !== action.lp),
+                copyList: state.copyList.filter(element => element.lp !== action.lp)
+            }
         case 'EXPIRED':
-            return state.map(element => {
-                if(element.lp === action.lp){
-                    return {
-                        ...element,
-                        active: 'Expired'
+            return {
+                list: state.list.map(element => {
+                    if(element.lp === action.lp){
+                        return {
+                            ...element,
+                            active: 'Expired'
+                        }
                     }
-                }
-                return element
-                
-            })
+                    return element
+                }),
+                copyList: state.copyList.map(element => {
+                    if(element.lp === action.lp){
+                        return {
+                            ...element,
+                            active: 'Expired'
+                        }
+                    }
+                    return element
+                })
+            }
+            
         case 'DONE':
-            return state.map(element => {
-                if(element.lp === action.lp){
-                    return {
-                        ...element,
-                        active: 'Done'
+            return {
+                list: state.list.map(element => {
+                    if(element.lp === action.lp){
+                        return {
+                            ...element,
+                            active: 'Done'
+                        }
                     }
-                }
-                return element
-
-            })
+                    return element
+                }),
+                copyList: state.copyList.map(element => {
+                    if(element.lp === action.lp){
+                        return {
+                            ...element,
+                            active: 'Done'
+                        }
+                    }
+                    return element
+                })
+            }
         case 'FILTER':
             if (action.box !== "All"){
-                return (state.filter(function(item) {
+                return ({
+                    ...state,
+                    list: state.copyList
+                        .filter(item => item.text.toLowerCase().startsWith(action.text.toLowerCase()))
+                        .filter(function(item) {
                             return(item.active === action.box)
-                        }))
+                        })})
             }
             else{
-                return state
+                return {
+                    ...state,
+                    list: state.copyList
+                        .filter(item => item.text.toLowerCase().startsWith(action.text.toLowerCase()))
+                }
             }
 
         default:

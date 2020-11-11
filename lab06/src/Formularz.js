@@ -7,37 +7,36 @@ import Moment from 'moment';
 
 const Formularz = (props) => {
 
-    const [timer, setTimer] = useState("")
+    const [timer, setTimer] = useState("");
     const [text, setText] = useState("");
-    const [reload, setReload] = useState("");
     const [date, setDate] = useState("");
     const [warning_date, setWarning_Date] = useState("");
     const [warning_text, setWarning_Text] = useState("");
-    const [dateTo, setDateTo] = useState("")
-    const [active, setActive] = useState("inactive")
-    const [textFilter, setTextFilter] = useState("")
-    const [box, setBox] = useState("All")
-    const activity = ['Done', 'Todo', 'Expired']
+    const [dateTo, setDateTo] = useState("");
+    const [active, setActive] = useState("inactive");
+    const [textFilter, setTextFilter] = useState("");
+    const [box, setBox] = useState("All");
+    const activity = ['Done', 'Todo', 'Expired'];
         
 
 
 
     function addText_to_List() {
-        let now = new Date()
-        let new_date = Moment(date).format('DD.MM.YYYY').split(".")
-        let new_test = now.toLocaleDateString().split(".")
+        let now = new Date();
+        let new_date = Moment(date).format('DD.MM.YYYY').split(".");
+        let new_test = now.toLocaleDateString().split(".");
 
         if(text !== "" && date !== ""){
             if(new_date[2]>new_test[2]){
-                setActive("active")
+                setActive("active");
             }
             else if(new_date[2] === new_test[2]){
                 if(new_date[1]>new_test[1]){
-                    setActive("active")
+                    setActive("active");
                 }
                 else if(new_date[1] === new_test[1]){
                     if(new_date[0]>new_test[0]){
-                        setActive("active")
+                        setActive("active");
                     }
                     else{
                         setWarning_Date("UWAGA! Podano złą datę");
@@ -52,11 +51,11 @@ const Formularz = (props) => {
             }
         }
         else if(text === "" && date !== ""){
-            setWarning_Date("")
+            setWarning_Date("");
             setWarning_Text("UWAGA! Nie zawarto tekstu");
         }
         else if(date === "" && text !== ""){
-            setWarning_Text("")
+            setWarning_Text("");
             setWarning_Date("UWAGA! Nie zawarto daty");
         }
         else{
@@ -67,64 +66,59 @@ const Formularz = (props) => {
     }
 
 
-    function addDone(){
-        if(reload === "reload"){
-            setReload("reload again")
-        }
-        else{
-            setReload("reload")
-        }
+    function addDone(lp){
+        props.done(lp)
+    }
+
+    function addExpired(lp){
+        props.expired(lp)
     }
 
 
     function deleteEvent(event){
-        props.reduce({type: 'DELETE', lp: event.lp})
+        props.delete(event.lp);
     }
 
 
     function changeActive(change){
         if(dateTo !== ""){
-            let date_new = Moment(date).format('DD.MM.YYYY')
-            let add = {lp: props.immutableState.length !== 0 ? props.immutableState[props.immutableState.length-1]['lp'] + 1 : 1 ,text, date: date_new, hour: dateTo,  active: "Todo"}
-            props.add(add)
-            setActive(change)
-            setBox("All")
-            setTextFilter("")
-            setDateTo("")
+            let date_new = Moment(date).format('DD.MM.YYYY');
+            let add = {lp: props.value.length !== 0 ? props.value[props.value.length-1]['lp'] + 1 : 1 ,text, date: date_new, hour: dateTo,  active: "Todo"};
+            props.add(add);
+            setActive(change);
+            setBox("All");
+            setTextFilter("");
+            setDateTo("");
             setDate("");
             setText("");
             setWarning_Date("");
             setWarning_Text("");
         }
         else{
-            setActive("active")
+            setActive("active");
         }
     }
 
 
     function funDateTo(event){
-        setDateTo(event)
+        setDateTo(event);
     }
 
     
     function funtextFilter(event){
-        props.filter(box,event)
-        setTextFilter(event)
+        props.filter(box, event);
+        setTextFilter(event);
     }
 
     function activityFilter(event){
-        props.reduce({type: 'FILTER', box: event, text: textFilter})
-        setBox(event)
+        props.filter(event, textFilter);
+        setBox(event);
     }
 
     function funSetTimer(time){
-        setTimer(time)
+        setTimer(time);
     }
 
-    function changeStatus(status, item){
-        props.reduce({type: status, lp: item.lp})
-        setBox("All")
-    }
 
     return(
         <div className={"container"}>
@@ -164,8 +158,9 @@ const Formularz = (props) => {
             </div>
 
             <p className="special_text">Lista to-do:</p>
-            <ToDo   list = {props.immutableState} 
+            <ToDo   list = {props.value} 
                     deleteEvent = {deleteEvent} 
+                    addExpired = {addExpired}
                     addDone = {addDone} 
                     active = {active}
                     dateTo = {dateTo}
@@ -173,7 +168,6 @@ const Formularz = (props) => {
                     changeActive = {changeActive}
                     setTimer={funSetTimer}
                     timer={timer}
-                    changeStatus={changeStatus}
                     />
         </div>
     )

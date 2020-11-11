@@ -32,26 +32,22 @@ class ToDo extends Component {
         this.props.list.map((item) => {
             let new_date = item.date.split(".")
             if(new_date[2]<new_time[2]){  
-                this.props.changeStatus('EXPIRED', item)        
-                item.active = "Expired"
+                this.props.addExpired(item.lp)        
                 return item
             }
             else if(new_date[2] === new_time[2]){
                 if(new_date[1]<new_time[1]){
-                    this.props.changeStatus('EXPIRED', item)        
-                    item.active = "Expired"
+                    this.props.addExpired(item.lp)
                     return item
                 }
                 else if(new_date[1] === new_time[1]){
                     if(new_date[0]<new_time[0]){
-                        this.props.changeStatus('EXPIRED', item)        
-                        item.active = "Expired"
+                        this.props.addExpired(item.lp)
                         return item
                     }
                     else if(new_date[0] === new_time[0]){
                         if(item.hour+":00" <= this.props.timer.toLocaleTimeString()){
-                            this.props.changeStatus('EXPIRED', item)                   
-                            item.active = "Expired"
+                            this.props.addExpired(item.lp)
                             return item
                         }
                         return item
@@ -88,7 +84,7 @@ class ToDo extends Component {
                                         value ="Przycisk usuń"/>
                                     <input
                                         type = "button" 
-                                        onClick = {() => { this.props.changeStatus('DONE', choose); choose.active = "Done"; this.props.addDone()}}
+                                        onClick = {() => {this.props.addDone(choose.lp)}}
                                         value ="Przycisk zakończ zadanie"/>
                                 </div>
                             )}
