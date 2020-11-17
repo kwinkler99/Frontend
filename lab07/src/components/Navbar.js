@@ -1,22 +1,24 @@
 const navStyle = {
-    'background-color': '#333',
+    backgroundColor: '#333',
     'overflow': 'hidden'
 }
 
 const linkStyle = {
     float: 'left',
     color: '#f2f2f2',
-    'text-align': 'center',
+    textAlign: 'center',
     padding: '14px 16px',
-    'text-decoration': 'none',
-    'font-size': '17px'
+    textDecoration: 'none',
+    fontSize: '17px'
 }
+
+
 
 const Navbar = () => (
   <div style={navStyle}>
-    <a href="" style={linkStyle}>Home</a>
-    <a href="" style={linkStyle}>Cities</a>
-    <a href="" style={linkStyle}>About</a>
+    <a href="/" style={linkStyle}>Home</a>
+    <a href="/cities" style={linkStyle}>Cities</a>
+    <a href="/about" style={linkStyle}>About</a>
   </div> 
 )
 

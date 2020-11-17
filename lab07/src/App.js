@@ -5,6 +5,7 @@ import About from './components/About';
 import Cities from './components/Cities';
 import NotFound from './components/NotFound';
 import CityDetails from './components/CityDetails';
+import Navbar from './components/Navbar';
 
 
 
@@ -12,7 +13,8 @@ function App() {
   return (
     <div>
       <Router>
-        <Switch>
+        <Route path="/" component={Navbar} />
+        <Switch> 
           <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />
           <Route exact path="/cities" component={Cities} />
