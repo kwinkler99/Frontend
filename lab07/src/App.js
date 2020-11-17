@@ -3,6 +3,7 @@ import './App.css';
 import Home from './components/Home';
 import About from './components/About';
 import Cities from './components/Cities';
+import NotFound from './components/NotFound';
 
 
 
@@ -14,6 +15,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />
           <Route path="/cities" component={Cities} />
+          <Route component={NotFound} />
         </Switch>
       </Router>    
     </div>

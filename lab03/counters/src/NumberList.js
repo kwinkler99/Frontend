@@ -14,15 +14,14 @@ class NumberList extends Component {
         this.decrement = this.decrement.bind(this)
         this.addNumber = this.addNumber.bind(this)
         this.changeText = this.changeText.bind(this)
-        this.stop = this.stop.bind(this)
     }
 
     increment(key){
         this.props.increment(key)
     }
 
-    decrement(key, active){
-        this.props.decrement(key, active)
+    decrement(key){
+        this.props.decrement(key)
     }
 
     delete(key){
@@ -39,10 +38,6 @@ class NumberList extends Component {
         this._inputElement = ""
     }
 
-    stop(key){
-        this.props.stop(key)
-    }
-
 
 
     createList(item){
@@ -52,7 +47,7 @@ class NumberList extends Component {
                 <input type="button" value="+"
                        onClick={() => this.increment(item.key)}/>
                 <input type="button" value="-" 
-                       onClick={() => this.decrement(item.key, item.active)}/>
+                       onClick={() => this.decrement(item.key)}/>
                 <input className="text" typ="text" 
                        value = {item.text}
                        onChange={(e) => this.changeText(e.target.value, item.key)}
@@ -61,7 +56,6 @@ class NumberList extends Component {
                        onClick={() => this.addNumber(item.key)}/>
                 <input type="button" value="Usuń"
                        onClick={() => this.delete(item.key)}/>
-                <input type="button" value="Stop" onClick={() => this.stop(item.key)}/>
             </div> 
                 
         )
