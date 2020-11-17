@@ -19,7 +19,7 @@ const Navbar = () => (
     <a href="/" style={linkStyle}>Home</a>
     <a href="/cities" style={linkStyle}>Cities</a>
     <a href="/about" style={linkStyle}>About</a>
-  </div> 
+  </div>
 )
 
 export default Navbar;

@@ -6,6 +6,7 @@ import Cities from './components/Cities';
 import NotFound from './components/NotFound';
 import CityDetails from './components/CityDetails';
 import Navbar from './components/Navbar';
+import Countries from './components/Countries';
 
 
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/about" component={About} />
           <Route exact path="/cities" component={Cities} />
           <Route path="/cities/:id" component={CityDetails} />
+          <Route path="/countries" component={Countries} />
           <Route component={NotFound} />
         </Switch>
       </Router>    
