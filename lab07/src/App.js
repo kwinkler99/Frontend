@@ -4,6 +4,7 @@ import Home from './components/Home';
 import About from './components/About';
 import Cities from './components/Cities';
 import NotFound from './components/NotFound';
+import CityDetails from './components/CityDetails';
 
 
 
@@ -14,7 +15,8 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />
-          <Route path="/cities" component={Cities} />
+          <Route exact path="/cities" component={Cities} />
+          <Route path="/cities/:id" component={CityDetails} />
           <Route component={NotFound} />
         </Switch>
       </Router>    

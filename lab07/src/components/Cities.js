@@ -3,7 +3,7 @@ const Cities = () => {
     
     return (
         <ul>
-            {cities.map(city => (<li>{city.name}</li>))}
+            {cities.map(city => (<li key = {city.name}>{city.name}</li>))}
         </ul>
     ) 
 }
