@@ -1,4 +1,4 @@
-import { Route, BrowserRouter  as Router, Switch } from 'react-router-dom';
+import { Route, BrowserRouter  as Router, Switch, browserHistory } from 'react-router-dom';
 import './App.css';
 import Home from './components/Home';
 import About from './components/About';
@@ -8,10 +8,10 @@ import CityDetails from './components/CityDetails';
 import Navbar from './components/Navbar';
 import Countries from './components/Countries';
 import CountryDetails from './components/CountryDetails';
+import CountryEdit from './components/CountryEdit';
 
-
-
-function App() {
+function App({data, change}) {
+  
   return (
     <div>
       <Router>
@@ -21,9 +21,9 @@ function App() {
           <Route path="/about" component={About} />
           <Route exact path="/cities" component={Cities} />
           <Route path="/cities/:id" component={CityDetails} />
-          <Route exact path="/countries" component={Countries} />
-          <Route path="/countries/:id" component={CountryDetails} />
-
+          <Route exact path="/countries" component={() => <Countries countries={data} params={new URLSearchParams(window.location.search)} />} />
+          <Route path="/countries/:id/edit" component={() => <CountryEdit setCountry={change} countries={data} />} />
+          <Route path="/countries/:id" component={() => <CountryDetails countries={data} />} />
           <Route component={NotFound} />
         </Switch>
       </Router>    
