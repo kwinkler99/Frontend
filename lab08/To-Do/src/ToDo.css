@@ -1,0 +1,38 @@
+.items{
+    list-style: none;
+    background-color: rgb(47, 119, 65);
+    border-radius: 7px;
+    padding: 10px;
+    margin-top: 5px;
+    height: auto;
+}
+
+.items input{
+    padding: 20px;
+    margin: 1px;
+    margin-top: 10px;
+    background-color: rgb(116, 165, 116);
+    border: 2px rgb(116, 165, 116);
+}
+
+.items input:hover{
+    background-color: rgb(26, 65, 26)
+}
+
+.items_done{
+    background-color: rgb(110, 185, 110);
+    border-radius: 7px;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: auto;
+}
+
+.items_expired{
+    background-color: rgb(161, 135, 100);
+    border-radius: 7px;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: auto;
+}
