@@ -11,8 +11,11 @@ class App extends Component {
         return(
             <Formularz 
                 value = { this.props.value.list }
+                archives = { this.props.archives }
                 copyValue = { this.props.value.copyList } 
                 add = { this.props.add }
+                add_to_archives_done = { this.props.add_to_archives_done }
+                add_to_archives_expired = { this.props.add_to_archives_expired }
                 delete = { this.props.delete }
                 expired = { this.props.expired }
                 done = { this.props.done }
@@ -23,12 +26,19 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        value: state.reduce
+        value: state.reduce,
+        archives: state.archives
     }
 }
   
 const mapDispatchToProps = (dispatch) => {
     return {
+        add_to_archives_done: (arch) => {
+            dispatch({ type: 'ADD_TO_ARCHIVES_DONE', new_arch: arch })
+        },
+        add_to_archives_expired: (arch) => {
+            dispatch({ type: 'ADD_TO_ARCHIVES_EXPIRED', new_arch: arch })
+        },
         add: (add) => {
             dispatch({ type: 'ADD', add_new: add })
         },

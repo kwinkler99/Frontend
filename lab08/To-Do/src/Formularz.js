@@ -66,12 +66,15 @@ const Formularz = (props) => {
     }
 
 
-    function addDone(lp){
-        props.done(lp)
+    function addDone(item){
+        props.delete(item.lp)
+        props.add_to_archives_done(item)
+
     }
 
-    function addExpired(lp){
-        props.expired(lp)
+    function addExpired(item){
+        props.delete(item.lp)
+        props.add_to_archives_expired(item)
     }
 
 
@@ -81,9 +84,10 @@ const Formularz = (props) => {
 
 
     function changeActive(change){
+
         if(dateTo !== ""){
             let date_new = Moment(date).format('DD.MM.YYYY');
-            let add = {lp: props.copyValue.length !== 0 ? props.copyValue[props.copyValue.length-1]['lp'] + 1 : 1 ,text, date: date_new, hour: dateTo,  active: "Todo"};
+            let add = {lp: props.copyValue.length > 0 ? props.copyValue[props.copyValue.length - 1]['lp'] + 1 : 1 ,text, date: date_new, hour: dateTo,  active: "Todo"};
             props.add(add);
             setActive(change);
             setBox("All");
@@ -158,7 +162,9 @@ const Formularz = (props) => {
             </div>
 
             <p className="special_text">Lista to-do:</p>
-            <ToDo   list = {props.value} 
+            <ToDo   
+                    archives = {props.archives}
+                    list = {props.value} 
                     deleteEvent = {deleteEvent} 
                     addExpired = {addExpired}
                     addDone = {addDone} 

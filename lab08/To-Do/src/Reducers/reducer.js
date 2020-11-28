@@ -1,9 +1,13 @@
 import { combineReducers } from 'redux'
 
-const reduce = (state, action) => {
+const start = {
+    list: [],
+    copyList: []
+} 
+
+const reduce = (state = start, action) => {
     switch(action.type){
         case 'ADD':
-            console.log(state)
             return {
                 list: [ ...state.copyList, action.add_new ],
                 copyList: [ ...state.copyList, action.add_new ]
@@ -14,49 +18,7 @@ const reduce = (state, action) => {
                 list: state.list.filter(element => element.lp !== action.lp),
                 copyList: state.copyList.filter(element => element.lp !== action.lp)
             }
-        case 'EXPIRED':
-            return {
-                list: state.list.map(element => {
-                    if(element.lp === action.lp){
-                        return {
-                            ...element,
-                            active: 'Expired'
-                        }
-                    }
-                    return element
-                }),
-                copyList: state.copyList.map(element => {
-                    if(element.lp === action.lp){
-                        return {
-                            ...element,
-                            active: 'Expired'
-                        }
-                    }
-                    return element
-                })
-            }
             
-        case 'DONE':
-            return {
-                list: state.list.map(element => {
-                    if(element.lp === action.lp){
-                        return {
-                            ...element,
-                            active: 'Done'
-                        }
-                    }
-                    return element
-                }),
-                copyList: state.copyList.map(element => {
-                    if(element.lp === action.lp){
-                        return {
-                            ...element,
-                            active: 'Done'
-                        }
-                    }
-                    return element
-                })
-            }
         case 'FILTER':
             if (action.box !== "All"){
                 return ({
@@ -76,11 +38,26 @@ const reduce = (state, action) => {
             }
 
         default:
-            return {
-                list: [],
-                copyList: []
-            } 
+            return state;
     }
 }
 
-export default combineReducers({ reduce })
+
+const archives = (state = [], action) => {
+    switch(action.type){
+        case 'ADD_TO_ARCHIVES_DONE':
+            action.new_arch.lp = state.length + 1
+            action.new_arch.active = 'Done'
+            return [...state, action.new_arch]
+
+        case 'ADD_TO_ARCHIVES_EXPIRED':
+            action.new_arch.lp = state.length + 1
+            action.new_arch.active = 'Expired'
+            return [...state, action.new_arch]
+
+        default:
+            return state;
+    }
+}
+
+export default combineReducers({ reduce, archives })
