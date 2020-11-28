@@ -2,10 +2,11 @@ import React, {useState} from "react";
 import ToDo from './to-do.js'
 import Find from './Find.js'
 import './Formularz.css'
+import {connect} from "react-redux";
 import Moment from 'moment';
 
 
-const Formularz = (props) => {
+const Formularz = ({ value, addItem, filter }) => {
 
     const [timer, setTimer] = useState("");
     const [text, setText] = useState("");
@@ -66,29 +67,11 @@ const Formularz = (props) => {
     }
 
 
-    function addDone(item){
-        props.delete(item.lp)
-        props.add_to_archives_done(item)
-
-    }
-
-    function addExpired(item){
-        props.delete(item.lp)
-        props.add_to_archives_expired(item)
-    }
-
-
-    function deleteEvent(event){
-        props.delete(event.lp);
-    }
-
-
     function changeActive(change){
-
         if(dateTo !== ""){
             let date_new = Moment(date).format('DD.MM.YYYY');
-            let add = {lp: props.copyValue.length > 0 ? props.copyValue[props.copyValue.length - 1]['lp'] + 1 : 1 ,text, date: date_new, hour: dateTo,  active: "Todo"};
-            props.add(add);
+            let add = {lp: value.copyList.length > 0 ? value.copyList[value.copyList.length - 1]['lp'] + 1 : 1 ,text, date: date_new, hour: dateTo,  active: "Todo"};
+            addItem(add);
             setActive(change);
             setBox("All");
             setTextFilter("");
@@ -110,12 +93,12 @@ const Formularz = (props) => {
 
     
     function funtextFilter(event){
-        props.filter(box, event);
+        filter(box, event);
         setTextFilter(event);
     }
 
     function activityFilter(event){
-        props.filter(event, textFilter);
+        filter(event, textFilter);
         setBox(event);
     }
 
@@ -163,11 +146,6 @@ const Formularz = (props) => {
 
             <p className="special_text">Lista to-do:</p>
             <ToDo   
-                    archives = {props.archives}
-                    list = {props.value} 
-                    deleteEvent = {deleteEvent} 
-                    addExpired = {addExpired}
-                    addDone = {addDone} 
                     active = {active}
                     dateTo = {dateTo}
                     funDateTo = {funDateTo}
@@ -179,7 +157,22 @@ const Formularz = (props) => {
     )
 }
 
+const mapStateToProps = (state) => {
+    return {
+        value: state.reduce,
+        archives: state.archives
+    }
+}
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addItem: (add) => {
+            dispatch({ type: 'ADD', add_new: add })
+        },
+        filter: (box, text) => {
+            dispatch({ type: 'FILTER', box: box, text: text })
+        }
+    }
+}
 
-
-export default Formularz;
+export default connect(mapStateToProps, mapDispatchToProps)(Formularz);

@@ -3,6 +3,7 @@ import './ToDo.css'
 import FlipMove from 'react-flip-move';
 import SetHour from './SetHour' 
 import Archives from './Archives'
+import {connect} from "react-redux";
 
 
 
@@ -30,25 +31,29 @@ class ToDo extends Component {
     check(){
         let time = this.props.timer.toLocaleDateString()
         let new_time = time.split(".")
-        this.props.list.map((item) => {
+        this.props.value.list.map((item) => {
             let new_date = item.date.split(".")
-            if(new_date[2]<new_time[2]){  
-                this.props.addExpired(item)        
+            if(new_date[2]<new_time[2]){
+                this.props.deleteItem(item.lp)  
+                this.props.expired(item)        
                 return item
             }
             else if(new_date[2] === new_time[2]){
                 if(new_date[1]<new_time[1]){
-                    this.props.addExpired(item)
+                    this.props.deleteItem(item.lp)
+                    this.props.expired(item)
                     return item
                 }
                 else if(new_date[1] === new_time[1]){
                     if(new_date[0]<new_time[0]){
-                        this.props.addExpired(item)
+                        this.props.deleteItem(item.lp)
+                        this.props.expired(item)
                         return item
                     }
                     else if(new_date[0] === new_time[0]){
                         if(item.hour+":00" <= this.props.timer.toLocaleTimeString()){
-                            this.props.addExpired(item)
+                            this.props.deleteItem(item.lp)
+                            this.props.expired(item)
                             return item
                         }
                         return item
@@ -67,7 +72,7 @@ class ToDo extends Component {
         return(
             <div className = "listToDo">
                 <FlipMove duration={250} easing="ease-out">
-                    {this.props.list
+                    {this.props.value.list
                         .map(choose =>
                             {this.check()
                                 return(
@@ -80,11 +85,11 @@ class ToDo extends Component {
                                             Status: {choose.active}</div>
                                         <input 
                                             type = "button" 
-                                            onClick = {() => this.props.deleteEvent(choose)}
+                                            onClick = {() => this.props.deleteItem(choose.lp)}
                                             value ="Przycisk usuń"/>
                                         <input
                                             type = "button" 
-                                            onClick = {() => {this.props.addDone(choose)}}
+                                            onClick = {() => {this.props.deleteItem(choose.lp); this.props.add_to_archives_done(choose)}}
                                             value ="Przycisk zakończ zadanie"/>
                                     </div>
                                 )
@@ -92,12 +97,40 @@ class ToDo extends Component {
                         })
                     }
                     <p className="special_text">Archiwum: </p>
-                    <Archives {...this.props} />
+                    
                 </FlipMove>
+                <Archives />
                 <SetHour {...this.props}/>
             </div>
         )
     }
 }
 
-export default ToDo;
+const mapStateToProps = (state) => {
+    return {
+        value: state.reduce,
+        archives: state.archives
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        add_to_archives_done: (arch) => {
+            dispatch({ type: 'ADD_TO_ARCHIVES_DONE', new_arch: arch })
+        },
+        add_to_archives_expired: (arch) => {
+            dispatch({ type: 'ADD_TO_ARCHIVES_EXPIRED', new_arch: arch })
+        },
+        deleteItem: (lp) => {
+            dispatch({type: 'DELETE', lp: lp })
+        },
+        expired: (lp) => {
+            dispatch({ type: 'EXPIRED', lp: lp })
+        },
+        done: (lp) => {
+            dispatch({ type: 'DONE', lp: lp })
+        },
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ToDo);
