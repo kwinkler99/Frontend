@@ -1,11 +1,6 @@
-const reduce = (state, action) => {
-    if(state === undefined){
-        return {
-            list: [],
-            copyList: []
-        }
-    }
+import { combineReducers } from 'redux'
 
+const reduce = (state, action) => {
     switch(action.type){
         case 'ADD':
             console.log(state)
@@ -81,8 +76,11 @@ const reduce = (state, action) => {
             }
 
         default:
-            //do nothing    
+            return {
+                list: [],
+                copyList: []
+            } 
     }
 }
 
-export default reduce;
+export default combineReducers({ reduce })
