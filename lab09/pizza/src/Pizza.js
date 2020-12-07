@@ -1,28 +1,40 @@
 import React, { Component } from 'react';
-
-
+import Ingredients from './Ingredients'
+import AddIngredient from './AddIngredient'
+import {connect} from "react-redux";
 
 class Pizza extends Component {
-    constructor(props){
-        super(props)
-        
-        this.state = {
-            text: ""
-        }
-    }
-
-    
 
     render(){
         return (
-            <form>
-                <p>Wprowadz skladnik</p>
-                <input type="text" value={this.state.text} onChange={(event) => this.setState({text: event.target.valu})}/>
-                <input type="button" value="zatwierdz" />
-            </form>
+            <div>
+                <AddIngredient addIngredientsToList = { this.props.addIngredientsToList } />
+                <Ingredients list = { this.props.ingredients }/>
+            </div>
         )
     }
 
 }
 
-export default Pizza;
+
+const mapStateToProps = (state) => {
+    return {
+        ingredients: state.ingredients,
+        pizza: state.pizza
+    }
+}
+  
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addIngredientsToList: (new_ing) => {
+            dispatch({ type: 'ADD_INGREDIENT', new_ing: new_ing });
+        },
+        addIngredientsToPizza: (ing) => {
+            dispatch({ type: 'ADD_INGREDIENT_TO_PIZZA', ing: ing })
+        }
+    }
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Pizza);
