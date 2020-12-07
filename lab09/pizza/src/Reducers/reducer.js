@@ -4,7 +4,15 @@ const ingredients = (state = [], action) => {
 
     switch (action.type){
         case 'ADD_INGREDIENT':
-            return [...state, action.new_ing]
+            const id = state.length === 0 ? 1 : state[state.length - 1].id + 1
+            return [...state, {'name': action.new_ing, 'id': id, 'check': false}]
+        case 'ADD_INGREDIENT_TO_PIZZA':
+            state.map(a => {
+                a.check = false;
+                return a
+            })
+            return state
+
         default:
             return state
     }
@@ -15,7 +23,8 @@ const ingredients = (state = [], action) => {
 const pizza = (state = [], action) => {
     switch (action.type){
         case 'ADD_INGREDIENT_TO_PIZZA':
-            return state
+            const id = state.length === 0 ? 1 : state[state.length - 1].id + 1
+            return [...state, {'pizza': action.new_pizza, 'id': id}]
         default:
             return state
     }

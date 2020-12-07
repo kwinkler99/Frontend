@@ -23,8 +23,14 @@ class AddIngredient extends Component {
         return (
             <form>
                 <p>Wprowadz skladnik</p>
-                <input type="text" value={this.state.text} onChange={(event) => this.setState({text: event.target.value})}/>
-                <input type="button" onClick={() => this.addIngredient(this.state.text)} value="zatwierdz" />
+                <input 
+                    type="text" 
+                    value={this.state.text} 
+                    onChange={(event) => this.setState({text: event.target.value})}/>
+                <input 
+                    type="button" 
+                    onClick={() => this.addIngredient(this.state.text)} 
+                    value="Zatwierdź" />
             </form>
         )
     }

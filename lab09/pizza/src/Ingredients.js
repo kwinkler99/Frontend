@@ -9,7 +9,10 @@ class Ingredients extends Component {
 
     createList(item) {
         return(
-            <li key = {item}>{item}</li>
+            <li 
+                key = {item.id}>
+                    {item.name}
+            </li>
         )
     }
     

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Ingredients from './Ingredients'
 import AddIngredient from './AddIngredient'
+import CreatePizza from './CreatePizza'
 import {connect} from "react-redux";
 
 class Pizza extends Component {
@@ -8,8 +9,11 @@ class Pizza extends Component {
     render(){
         return (
             <div>
-                <AddIngredient addIngredientsToList = { this.props.addIngredientsToList } />
-                <Ingredients list = { this.props.ingredients }/>
+                <AddIngredient 
+                    addIngredientsToList = { this.props.addIngredientsToList } />
+                <Ingredients 
+                    list = { this.props.ingredients }/>
+                <CreatePizza />
             </div>
         )
     }
@@ -28,9 +32,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         addIngredientsToList: (new_ing) => {
             dispatch({ type: 'ADD_INGREDIENT', new_ing: new_ing });
-        },
-        addIngredientsToPizza: (ing) => {
-            dispatch({ type: 'ADD_INGREDIENT_TO_PIZZA', ing: ing })
         }
     }
 }
