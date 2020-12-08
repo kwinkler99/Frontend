@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './CreatePizza.css'
+import '../CreatePizza.css'
 import {connect} from "react-redux";
 
 const dough = ["Ciasto cienkie", "Na grubym cieście", "Ciasto makaronowe", "Ciasto tradycyjne"]

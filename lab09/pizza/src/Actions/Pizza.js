@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Ingredients from './Ingredients'
-import AddIngredient from './AddIngredient'
+import Ingredients from '../Ingredients'
+import AddIngredient from '../AddIngredient'
 import CreatePizza from './CreatePizza'
 import {connect} from "react-redux";
 import Pizzas from './Pizzas';

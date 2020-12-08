@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Pizza from './Pizza'
+import Pizza from './Actions/Pizza'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import rootReducer from './Reducers/reducer'

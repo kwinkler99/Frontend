@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import PizzaItem from './PizzaItem'
+import PizzaItem from '../PizzaItem'
 import {connect} from "react-redux";
-import './Pizzas.css'
+import '../Pizzas.css'
 
 class Pizzas extends Component {
     constructor(props){
