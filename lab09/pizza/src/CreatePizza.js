@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './CreatePizza.css'
 import {connect} from "react-redux";
 
 const dough = ["Ciasto cienkie", "Na grubym cieście", "Ciasto makaronowe", "Ciasto tradycyjne"]
@@ -33,7 +34,7 @@ class CreatePizza extends Component {
                     checked={item.check}
                     onChange={() => {this.setState({dough: this.state.dough}); item.check = !item.check}} 
                     value={item.name} />
-                <label>{item.name}</label>
+                <label class="container">{item.name}</label>
             </div>
         )
     }
@@ -54,22 +55,25 @@ class CreatePizza extends Component {
         let selectList = dough.map(this.createSelect)
         return (
             <div>
-                <p>Zaznacz które składniki chcesz dodać do pizzy:</p>
-                <form>
-                    {checkboxList}
+                <form class="createPizza">
+                    <p>Zaznacz które składniki chcesz dodać do pizzy:</p>
+                    <div class="onLeft">
+                        {checkboxList}
+                    </div>
                     <p>Wybierz ciasto:</p>
-                    <select 
-                        value={this.state.dough} 
-                        onChange={(event) => this.setState({
-                            dough: event.target.value
-                        })} 
-                        name="dough" 
-                        id="dough">
-                            {selectList}
-                    </select>
-                    <br/>
-                    <br/>
+                    <div class="onLeft">
+                        <select 
+                            value={this.state.dough} 
+                            onChange={(event) => this.setState({
+                                dough: event.target.value
+                            })} 
+                            name="dough" 
+                            id="dough">
+                                {selectList}
+                        </select><br/>
+                    </div>
                     <input 
+                        class="button"
                         type="button" 
                         onClick={() => this.submitIngredients()} 
                         value="Zatwierdź" />

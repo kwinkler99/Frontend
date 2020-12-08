@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PizzaItem from './PizzaItem'
 import {connect} from "react-redux";
+import './Pizzas.css'
 
 class Pizzas extends Component {
     constructor(props){
@@ -16,7 +17,7 @@ class Pizzas extends Component {
 
     createList(item){
         return(
-            <div key={item.id}>
+            <div class="pizzas" key={item.id}>
                 <PizzaItem pizza={item}/>
                 <input type="button" 
                     onClick={() => this.removePizza(item.id)}

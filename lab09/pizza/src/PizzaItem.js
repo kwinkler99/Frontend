@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './PizzaItem.css'
 
 class PizzaItem extends Component {  
     constructor(props){
@@ -16,7 +17,7 @@ class PizzaItem extends Component {
     render(){
         const list = this.props.pizza.details.ingredients.map(this.createList)
         return (
-            <div>
+            <div class='pizzaItem'>
                 <p>Pizza nr {this.props.pizza.id}, ciasto: {this.props.pizza.details.dough}</p>
                 <ul>
                     {list}

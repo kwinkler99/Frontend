@@ -21,8 +21,8 @@ class AddIngredient extends Component {
 
     render(){
         return (
-            <form>
-                <p>Wprowadz skladnik</p>
+            <form class="addIngredients">
+                <p>Wprowadż składnik</p>
                 <input 
                     type="text" 
                     value={this.state.text} 
