@@ -24,7 +24,9 @@ const pizza = (state = [], action) => {
     switch (action.type){
         case 'ADD_INGREDIENT_TO_PIZZA':
             const id = state.length === 0 ? 1 : state[state.length - 1].id + 1
-            return [...state, {'pizza': action.new_pizza, 'id': id}]
+            return [...state, {'details': action.new_pizza, 'id': id}]
+        case 'REMOVE_PIZZA':
+            return state.filter(elem => elem.id !== action.id)
         default:
             return state
     }

@@ -3,6 +3,7 @@ import Ingredients from './Ingredients'
 import AddIngredient from './AddIngredient'
 import CreatePizza from './CreatePizza'
 import {connect} from "react-redux";
+import Pizzas from './Pizzas';
 
 class Pizza extends Component {
 
@@ -14,6 +15,7 @@ class Pizza extends Component {
                 <Ingredients 
                     list = { this.props.ingredients }/>
                 <CreatePizza />
+                <Pizzas />
             </div>
         )
     }
