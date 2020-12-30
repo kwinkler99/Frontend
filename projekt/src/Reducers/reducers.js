@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux'
 
+
+
 const initialState = {
     data:[]
 }
@@ -27,7 +29,7 @@ const products = (state = initialState, action) => {
 
             return {
                 ...state,
-                data: response.reverse()
+                data: response
             }
        
         default:
