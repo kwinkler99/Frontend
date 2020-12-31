@@ -1,0 +1,56 @@
+.filter{
+    padding: 40px;
+    margin: 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center
+}
+
+input{
+    width: 46%;
+    text-align: center;
+    font-family: 'Abel', sans-serif;
+    color: rgb(31, 31, 31);
+    letter-spacing: 1px;
+    padding: 20px;
+    background-color: rgb(165, 165, 165);
+    border: 2px solid rgb(129, 129, 129);
+}
+
+input:hover{
+    background-color: rgb(129, 129, 129);
+    border: 2px solid rgb(129, 129, 129);
+}
+
+select{
+    width: 46%;
+    font-family: 'Abel', sans-serif;
+    color: rgb(31, 31, 31);
+    letter-spacing: 1px;
+    padding: 20px;
+    background-color: rgb(129, 129, 129);
+    border: 0.5px solid rgb(129, 129, 129);
+}
+
+.checkbox{
+    margin-top: 20px;
+    margin-left: 40px;
+    display: inline-block;
+}
+
+input.number{
+    width: 70px;
+    height: 2px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.done{
+    background-color: rgb(165, 165, 165);
+    margin-top: 40px;
+    width: 95%;
+}
+
+.price{
+    margin-top: 50px;
+    display: inline-flex;
+}

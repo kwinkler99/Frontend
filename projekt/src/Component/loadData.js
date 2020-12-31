@@ -24,6 +24,16 @@ class LoadData extends Component {
                             <p className="category">Category: {item.category}</p>
                             <p className="price">{"$" + item.price}</p> 
                         </div>
+                        <div className="button">
+                            <input
+                                className="edit" 
+                                type="button" 
+                                value="Delete"/>
+                            <input 
+                                className="edit" 
+                                type="button"
+                                value="Edit"/>
+                        </div>
                     </div>
                 )}
             </div>
