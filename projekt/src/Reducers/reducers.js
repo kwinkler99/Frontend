@@ -3,7 +3,8 @@ import { combineReducers } from 'redux'
 
 
 const initialState = {
-    data:[]
+    data:[],
+    category: []
 }
 
 function arrangement(data){
@@ -27,18 +28,30 @@ function arrangement(data){
     return response
 }
 
+function takeCategory(data){
+    const category = [...new Set(data.map((item) => item.category))].filter(
+        (i) => i
+    )
+
+    return category
+}
+
 
 const products = (state = initialState, action) => {
     switch (action.type){
         case 'GET_DATA':
             return {
                 ...state,
-                data: arrangement(action.payload)
+                data: arrangement(action.payload),
+                category: takeCategory(action.payload)
             }
         case 'SORT_DATA':
             const data = arrangement(action.payload)
             const filterByText = data.filter(item => item.name.toLowerCase().startsWith(action.text.toLowerCase()))
-            return {data: filterByText}
+            return {
+                ...state,
+                data: filterByText
+            }
         default:
             return state;
     }

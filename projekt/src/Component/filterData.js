@@ -79,10 +79,7 @@ class FilterData extends Component {
     }
 
     render() {
-        const {data} = this.props.data
-        const category = [...new Set(data.map((item) => item.category))].filter(
-            (i) => i
-        )
+        const {category} = this.props.data
 
         return(
             <div className="filter">
@@ -149,14 +146,3 @@ const mapStateToProps  = (state) => ({
 })
 
 export default connect(mapStateToProps, {sortData})(FilterData)
-
-
-// select z wyborem przez co sortowac(cena, alfabetycznie, odwrotnie do alfabetycznego)
-// wyszukiwanie po nazwie
-// checkbox z kategoriami 
-// wystawic api -> przygotowac endpointy expressem node
-
-
-//psw i front 
-//potem testowanie
-//co z bazami 
