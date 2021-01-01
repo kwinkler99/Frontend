@@ -18,7 +18,7 @@ function arrangement(data){
             currency: currency,
             image: image_link,
             description: description,
-            category: category,
+            category: category === null ? "" : category,
             type: product_types,
             colors: product_colors,
             tag: tag_list
@@ -48,9 +48,11 @@ const products = (state = initialState, action) => {
         case 'SORT_DATA':
             const data = arrangement(action.payload)
             const filterByText = data.filter(item => item.name.toLowerCase().startsWith(action.text.toLowerCase()))
+            const filterByCategory = filterByText.filter(item => item.category.startsWith(...action.check.filter(a => a === item.category)))
+            
             return {
                 ...state,
-                data: filterByText
+                data: filterByCategory
             }
         default:
             return state;

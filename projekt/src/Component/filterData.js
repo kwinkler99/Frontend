@@ -115,7 +115,7 @@ class FilterData extends Component {
                             )
                         )} 
                     </div>
-                    <div className="price">
+                    <div className="setPrice">
                         <p>Cena od: </p>
                         <input
                             className="number" 
