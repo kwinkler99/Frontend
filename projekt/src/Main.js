@@ -1,6 +1,9 @@
 import React, { Component }  from 'react';
-import LoadData from './Component/loadData'
-import FilterData from './Component/filterData'
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import Home from './/Home';
+import Details from './Component/details.js'
+import NotFound from './Component/notFound.js';
+
 
 
 class Main extends Component {
@@ -9,8 +12,13 @@ class Main extends Component {
 
         return (
             <div className="App">
-                <FilterData />
-                <LoadData />
+                <Router>
+                    <Switch>
+                        <Route exact path="/" component={({history}) => <Home history={history}/>} />
+                        <Route path="/product" component={Details} />
+                        <Route component={NotFound} />
+                    </Switch>
+                </Router>
             </div>
         );
     }

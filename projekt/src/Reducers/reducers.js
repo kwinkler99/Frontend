@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux'
 
 
-
 const initialState = {
     data:[],
     category: [],
@@ -77,5 +76,27 @@ const products = (state = initialState, action) => {
 }
 
 
+const initialProductState = {
+    product: {
+        colors: []
+    }
+}
 
-export default combineReducers({ products })
+
+const product = (state = initialProductState, action) => {
+    switch(action.type){
+        case 'GET_PRODUCT':
+            return {
+                ...state,
+                product: arrangement(action.payload)[0],
+            };
+    
+        default:
+            return state
+    }
+
+}
+
+
+
+export default combineReducers({ products, product })

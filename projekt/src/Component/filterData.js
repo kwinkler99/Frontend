@@ -7,6 +7,8 @@ import './filterData.css'
 
 const select = ["Sortuj od A do Z", "Sortuj od Z do A", "Sortuj przez cenę"]
 
+
+
 class FilterData extends Component {
     constructor(props){
         super(props)
