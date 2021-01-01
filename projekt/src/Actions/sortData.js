@@ -13,7 +13,6 @@ export const sortData = (text, sort, check, to, from) => async dispatch => {
         else{
             sort = "price"
         }
-
         dispatch( {
             type: SORT_DATA,
             text: text,

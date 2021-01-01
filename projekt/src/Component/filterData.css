@@ -48,6 +48,13 @@ input.number{
     background-color: rgb(165, 165, 165);
     margin-top: 40px;
     width: 95%;
+    padding: 10px
+}
+
+.reset{
+    margin-top: 1px;
+    width: 95%;
+    padding: 10px
 }
 
 .setPrice{

@@ -4,7 +4,8 @@ import { combineReducers } from 'redux'
 
 const initialState = {
     data:[],
-    category: []
+    category: [],
+    price: 0
 }
 
 function arrangement(data){
@@ -14,11 +15,11 @@ function arrangement(data){
             id: id,
             brand: brand,
             name: name,
-            price: parseFloat(price),
+            price: parseFloat(price) || 0,
             currency: currency,
             image: image_link,
             description: description,
-            category: category === null ? "" : category,
+            category: category || "others",
             type: product_types,
             colors: product_colors,
             tag: tag_list
@@ -32,8 +33,7 @@ function takeCategory(data){
     const category = [...new Set(data.map((item) => item.category))].filter(
         (i) => i
     )
-
-    return category
+    return [...category, "others", "all"]
 }
 
 const sortBy = (key) => {
@@ -44,16 +44,19 @@ const sortBy = (key) => {
 
 const products = (state = initialState, action) => {
     switch (action.type){
+
         case 'GET_DATA':
             return {
                 ...state,
                 data: arrangement(action.payload),
-                category: takeCategory(action.payload)
+                category: takeCategory(action.payload),
+                price: Math.max(...action.payload.map(item => item.price))
             }
+
         case 'SORT_DATA':
             const data = arrangement(action.payload)
             const filterByText = data.filter(item => item.name.toLowerCase().startsWith(action.text.toLowerCase()))
-            const filterByCategory = filterByText.filter(item => item.category.startsWith(...action.check.filter(a => a === item.category)))
+            const filterByCategory = filterByText.filter(item => item.category.startsWith(...action.check.filter(a => a === item.category))) 
             let sortData = []
             if(action.sort === "reverse"){
                 sortData = filterByCategory.concat().sort(sortBy(["name"])).reverse()
@@ -67,6 +70,7 @@ const products = (state = initialState, action) => {
                 ...state,
                 data: filterByPrice
             }
+
         default:
             return state;
     }

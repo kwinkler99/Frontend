@@ -1,5 +1,6 @@
 import React, { Component }  from 'react';
 import {connect} from 'react-redux'
+import {getData} from '../Actions/getData'
 import {sortData} from '../Actions/sortData'
 import './filterData.css' 
 
@@ -15,7 +16,7 @@ class FilterData extends Component {
             sort: "Sortuj od A do Z",
             check: [],
             from: 0,
-            to: 0
+            to: null
         }
 
         this.handleText = this.handleText.bind(this);
@@ -24,6 +25,7 @@ class FilterData extends Component {
         this.handleFrom = this.handleFrom.bind(this);
         this.handleTo = this.handleTo.bind(this);
         this.handleDone = this.handleDone.bind(this);
+        this.handleReset = this.handleReset.bind(this);
 
     }
 
@@ -45,7 +47,19 @@ class FilterData extends Component {
         function functionCheck(value) {
             return value !== event.value;
         }
-        if(event.checked === true){
+        if(event.value === "all" && event.checked === true){
+            this.setState({
+                ...this.state,
+                check: this.props.data.category
+            });
+        }
+        else if(event.value === "all"){
+            this.setState({
+                ...this.state,
+                check: []
+            });
+        }
+        else if(event.checked === true){
             this.setState({
                 ...this.state,
                 check: [...this.state.check, event.value]
@@ -75,11 +89,24 @@ class FilterData extends Component {
 
     handleDone(){
         const {text, sort, check, to, from} = this.state
-        this.props.sortData(text, sort, check, to, from)
+        const {price} = this.props.data
+        this.props.sortData(text, sort, check, to || price, from)
+    }
+
+    handleReset(){
+        this.props.getData()
+        const {price} = this.props.data
+        this.setState({
+            text: "",
+            sort: "Sortuj od A do Z",
+            check: [],
+            from: 0,
+            to: price
+        })
     }
 
     render() {
-        const {category} = this.props.data
+        const {category, price} = this.props.data
 
         return(
             <div className="filter">
@@ -127,14 +154,19 @@ class FilterData extends Component {
                         <input 
                             className="number" 
                             type="number"
-                            value={this.state.to}
+                            value={this.state.to === null ? price : this.state.to}
                             onChange={(ev) => this.handleTo(ev.target.value)}/><br/>
                     </div>
                     <input
                         className="done"
                         type="button"
                         value="Zatwierdz"
-                        onClick={() => this.handleDone()}/>    
+                        onClick={() => this.handleDone()}/> 
+                    <input
+                        className="reset"
+                        type="button"
+                        value="Reset"
+                        onClick={() => this.handleReset()}/>      
                 </form>
             </div>
         )
@@ -145,4 +177,4 @@ const mapStateToProps  = (state) => ({
     data: state.products,
 })
 
-export default connect(mapStateToProps, {sortData})(FilterData)
+export default connect(mapStateToProps, {sortData, getData})(FilterData)
