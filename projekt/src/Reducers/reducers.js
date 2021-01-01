@@ -14,7 +14,7 @@ function arrangement(data){
             id: id,
             brand: brand,
             name: name,
-            price: price,
+            price: parseFloat(price),
             currency: currency,
             image: image_link,
             description: description,
@@ -36,6 +36,11 @@ function takeCategory(data){
     return category
 }
 
+const sortBy = (key) => {
+    return (a, b) => (a[key] > b[key]) ? 1 : ((b[key] > a[key]) ? -1 : 0);
+};
+
+
 
 const products = (state = initialState, action) => {
     switch (action.type){
@@ -49,10 +54,18 @@ const products = (state = initialState, action) => {
             const data = arrangement(action.payload)
             const filterByText = data.filter(item => item.name.toLowerCase().startsWith(action.text.toLowerCase()))
             const filterByCategory = filterByText.filter(item => item.category.startsWith(...action.check.filter(a => a === item.category)))
-            
+            let sortData = []
+            if(action.sort === "reverse"){
+                sortData = filterByCategory.concat().sort(sortBy(["name"])).reverse()
+            }
+            else{
+                sortData = filterByCategory.concat().sort(sortBy([action.sort]))
+            }
+            const filterByPrice = sortData.filter(item => action.from < item.price && item.price < action.to)
+
             return {
                 ...state,
-                data: filterByCategory
+                data: filterByPrice
             }
         default:
             return state;
