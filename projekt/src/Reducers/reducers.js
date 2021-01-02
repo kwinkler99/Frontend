@@ -109,11 +109,9 @@ const products = (state = initialState, action) => {
             }
         
         case 'DELETE_PRODUCT':
-            const withoutDelete = state.data.filter(item => item.id !== action.id)
-
             return {
                 ...state,
-                data: withoutDelete
+                data: arrangement(action.payload)
             }
 
         default:

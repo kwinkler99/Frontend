@@ -4,10 +4,10 @@ import axios from 'axios'
 export const getProduct = (id) => async dispatch => {
     
     try{
-        const res = await axios.get(`./products.json`)
+        const res = await axios.get(`http://localhost:5000/${id}`)
         dispatch( {
             type: GET_PRODUCT,
-            payload: res.data.filter(item => item.id === id)
+            payload: res.data
         })
     }
     catch(e){

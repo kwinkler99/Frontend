@@ -4,7 +4,7 @@ import axios from 'axios'
 export const getData = () => async dispatch => {
     
     try{
-        const res = await axios.get(`./products.json`)
+        const res = await axios.get(`http://localhost:5000`)
         dispatch( {
             type: GET_DATA,
             payload: res.data

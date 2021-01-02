@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const sortData = (text, sort, check, to, from) => async dispatch => {
     try{
-        const res = await axios.get(`./products.json`)
+        const res = await axios.get(`http://localhost:5000`)
         if(sort === "Sortuj od A do Z"){
             sort = "name"
         }
