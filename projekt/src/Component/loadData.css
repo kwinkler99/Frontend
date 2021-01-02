@@ -54,13 +54,28 @@ img{
     padding: 5px;
     border: 2px solid rgb(165, 165, 165);
     border-bottom: 2px solid rgb(73, 73, 73);
+    font-family: 'Abel', sans-serif;
+    color: rgb(31, 31, 31);
+    letter-spacing: 1px;
+    background-color: rgb(165, 165, 165);
 }
 
 .button{
     width:100%;
     align-self: flex-end;
+
 }
 
 .text{
     align-self: flex-end;
+}
+
+.textEdit input{
+    height: 30px;
+    width: 95%;
+    background: white;
+}
+
+.textEdit input:hover{
+    background: rgb(175, 175, 175);
 }

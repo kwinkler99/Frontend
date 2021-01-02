@@ -5,7 +5,7 @@
     text-align: center
 }
 
-input{
+.filter input{
     width: 46%;
     text-align: center;
     font-family: 'Abel', sans-serif;
@@ -29,6 +29,7 @@ select{
     padding: 20px;
     background-color: rgb(129, 129, 129);
     border: 0.5px solid rgb(129, 129, 129);
+    height: 59px;
 }
 
 .checkbox{

@@ -32,7 +32,8 @@ function arrangement(data){
             category: category || "others",
             type: product_types,
             colors: result,
-            tag: tag_list
+            tag: tag_list,
+            active: false
         }
         return product
     })
@@ -79,6 +80,40 @@ const products = (state = initialState, action) => {
             return {
                 ...state,
                 data: filterByPrice
+            }
+
+        case 'EDIT_PRODUCT':
+            const editData = state.data.map(item => {
+                if (item.id === action.id){
+                    item.active = !item.active
+                }
+                return item
+            })
+
+            return {
+                ...state,
+                data: editData
+            }
+
+        case 'EDIT_DONE':
+            const result = state.data.map(item => {
+                if (item.id === action.id){
+                    
+                    return action.product
+                }
+                return item
+            })
+            return {
+                ...state,
+                data: result
+            }
+        
+        case 'DELETE_PRODUCT':
+            const withoutDelete = state.data.filter(item => item.id !== action.id)
+
+            return {
+                ...state,
+                data: withoutDelete
             }
 
         default:
