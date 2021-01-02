@@ -12,29 +12,31 @@ class Details extends Component {
             <div className="product">
                 <img className="imgDetails" src={product.image} alt={product.name} />
                 <div className="textAlign">
-                    <p className="textDetails">Name: </p>
-                    <p>{product.name}</p>
-                    <p className="textDetails">Brand: </p>
-                    <p>{product.brand}</p>
-                    <p className="textDetails">Price: </p>
-                    <p>{product.price}</p>
-                    <p className="textDetails">Currency: </p>
-                    <p>{product.currency}</p>
-                    <p className="textDetails">Description: </p>
-                    <p>{product.description}</p>
-                    <p className="textDetails">Category: </p>
-                    <p>{product.category}</p>
-                    <p className="textDetails">Type: </p>
-                    <p>{product.type}</p>
-                    <p className="textDetails">Tags: </p>
-                    <p>{product.tag}</p>
-                    <p className="textDetails">Colors: </p>
-                    {product.colors.map(clr => 
-                        <div 
-                            key={clr.colour_name} 
-                            className="color" 
-                            style={{backgroundColor:clr.hex_value}}>
-                        </div>)}
+                    <b>Name: </b>
+                    <p className="textDetails">{product.name}</p>
+                    <b>Brand: </b>
+                    <p className="textDetails">{product.brand}</p>
+                    <b>Price: </b>
+                    <p className="textDetails">{product.price}</p>
+                    <b>Currency: </b>
+                    <p className="textDetails">{product.currency}</p>
+                    <b>Description: </b>
+                    <p className="textDetails">{product.description}</p>
+                    <b>Category: </b>
+                    <p className="textDetails">{product.category}</p>
+                    <b>Type: </b>
+                    <p className="textDetails">{product.type}</p>
+                    <b>Tags: </b>
+                    <p className="textDetails">{product.tag}</p>
+                    <b>Colors: </b>
+                    <div id="colors">
+                        {product.colors.map(clr => 
+                            <div 
+                                key={clr.colour_name} 
+                                className="color" 
+                                style={{backgroundColor:clr.hex_value}}>
+                            </div>)}
+                    </div>
                 </div>
             </div>
         )

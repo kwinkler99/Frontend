@@ -6,6 +6,10 @@
     display:inline-block;
 }
 
+#colors{
+    margin-top: 20px;
+}
+
 .product{
     display: grid;
     grid-template-columns: auto auto;
@@ -17,13 +21,8 @@
     border-top:3px solid rgb(82, 82, 82);
 }
 
-.textDetails p{
-    margin-left: 40px;
-}
-
 .textDetails{
-    font-weight: bold;
-    margin-left: 0;
+    margin-left: 20px;
 }
 
 .imgDetails{
