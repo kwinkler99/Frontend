@@ -10,6 +10,17 @@ const initialState = {
 function arrangement(data){
     const response = data.map(item => {
         const {id, brand, name, price, currency, image_link, description, category, product_types, product_colors, tag_list} = item
+        
+        //unique colors
+        const result = Array.from(new Set(product_colors.map(s => s.colour_name)))
+            .map(colour_name => {
+                return {
+                    colour_name: colour_name,
+                    hex_value: product_colors.find(s => s.colour_name === colour_name).hex_value
+                }
+            });
+        
+        //save product
         const product = {
             id: id,
             brand: brand,
@@ -20,7 +31,7 @@ function arrangement(data){
             description: description,
             category: category || "others",
             type: product_types,
-            colors: product_colors,
+            colors: result,
             tag: tag_list
         }
         return product
