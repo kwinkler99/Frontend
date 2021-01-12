@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
-import './display.css'
+import '../display.css'
 import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik';
 
 const initialValues = {

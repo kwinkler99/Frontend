@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import Display from '../Display'
+import Display from './Display'
 
 class FormikClass extends Component {
     constructor(props){
