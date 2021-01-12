@@ -113,22 +113,24 @@ class FilterData extends Component {
         return(
             <div className="filter">
                 <form>
-                    <input 
-                        type="text" 
-                        value={this.state.text} 
-                        onChange={(ev) => this.handleText(ev.target.value)} 
-                        placeholder="wpisz nazwe produktu" /> 
-                    <select 
-                        onChange={(ev) => this.handleSort(ev.target.value)} 
-                        value={this.state.sort}>
-                        {select.map(item => 
-                            <option 
-                                key={item} 
-                                value={item}>
-                            {item}</option>
-                            )}
+                    <div>
+                        <input 
+                            type="text" 
+                            value={this.state.text} 
+                            onChange={(ev) => this.handleText(ev.target.value)} 
+                            placeholder="wpisz nazwe produktu" /> 
+                        <select 
+                            onChange={(ev) => this.handleSort(ev.target.value)} 
+                            value={this.state.sort}>
+                            {select.map(item => 
+                                <option 
+                                    key={item} 
+                                    value={item}>
+                                {item}</option>
+                                )}
 
-                    </select><br/>
+                        </select>
+                    </div>
                     <div>
                         {category
                             .map(item => (
@@ -159,16 +161,18 @@ class FilterData extends Component {
                             value={this.state.to === null ? price : this.state.to}
                             onChange={(ev) => this.handleTo(ev.target.value)}/><br/>
                     </div>
-                    <input
-                        className="done"
-                        type="button"
-                        value="Zatwierdz"
-                        onClick={() => this.handleDone()}/> 
-                    <input
-                        className="reset"
-                        type="button"
-                        value="Reset"
-                        onClick={() => this.handleReset()}/>      
+                    <div>
+                        <input
+                            className="done"
+                            type="button"
+                            value="Zatwierdz"
+                            onClick={() => this.handleDone()}/> 
+                        <input
+                            className="reset"
+                            type="button"
+                            value="Reset"
+                            onClick={() => this.handleReset()}/>   
+                    </div>  
                 </form>
             </div>
         )
