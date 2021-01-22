@@ -71,7 +71,7 @@ class LoadData extends Component {
                 {data.map(item => 
                     <div className="item" key={item.id} >
                         <div onClick={() => this.handleProduct(item.id, item.active)}>
-                            <img src={item.image} alt={item.name} />
+                            <img src={item.image_link} alt={item.name} />
                             {!item.active && (
                                 <div className="text">
                                     <p className="brand">{item.brand}</p> 

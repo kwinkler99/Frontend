@@ -27,12 +27,12 @@ function arrangement(data){
             name: name,
             price: parseFloat(price) || 0,
             currency: currency,
-            image: image_link,
+            image_link: image_link,
             description: description,
             category: category || "others",
-            type: product_types,
-            colors: result,
-            tag: tag_list,
+            product_types: product_types,
+            product_colors: result,
+            tag_list: tag_list,
             active: false
         }
         return product
@@ -55,7 +55,6 @@ const sortBy = (key) => {
 
 const products = (state = initialState, action) => {
     switch (action.type){
-
         case 'GET_DATA':
             return {
                 ...state,
@@ -96,23 +95,23 @@ const products = (state = initialState, action) => {
             }
 
         case 'EDIT_DONE':
-            const result = state.data.map(item => {
-                if (item.id === action.id){
-                    
-                    return action.product
-                }
-                return item
-            })
             return {
                 ...state,
-                data: result
+                data: arrangement(action.payload)
             }
-        
+
         case 'DELETE_PRODUCT':
             return {
                 ...state,
                 data: arrangement(action.payload)
             }
+        
+        case 'REQUEST':
+            return state
+
+        case 'FAILURE':
+            console.log("Error")
+            return state
 
         default:
             return state;
@@ -122,7 +121,7 @@ const products = (state = initialState, action) => {
 
 const initialProductState = {
     product: {
-        colors: []
+        product_colors: []
     }
 }
 

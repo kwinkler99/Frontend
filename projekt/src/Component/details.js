@@ -10,7 +10,7 @@ class Details extends Component {
 
         return (
             <div className="product">
-                <img className="imgDetails" src={product.image} alt={product.name} />
+                <img className="imgDetails" src={product.image_link} alt={product.name} />
                 <div className="textAlign">
                     <b>Name: </b>
                     <p className="textDetails">{product.name}</p>
@@ -25,12 +25,12 @@ class Details extends Component {
                     <b>Category: </b>
                     <p className="textDetails">{product.category}</p>
                     <b>Type: </b>
-                    <p className="textDetails">{product.type}</p>
+                    <p className="textDetails">{product.product_types}</p>
                     <b>Tags: </b>
-                    <p className="textDetails">{product.tag}</p>
+                    <p className="textDetails">{product.tag_list}</p>
                     <b>Colors: </b>
                     <div id="colors">
-                        {product.colors.map(clr => 
+                        {product.product_colors.map(clr => 
                             <div 
                                 key={clr.colour_name} 
                                 className="color" 

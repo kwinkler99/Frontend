@@ -1,20 +1,15 @@
-import {GET_DATA, USERS_ERROR} from '../types'
-import axios from 'axios'
+import {REQUEST, GET_DATA_SUCCESS, FAILURE} from '../types'
+import { createAction } from 'redux-api-middleware';
 
-export const getData = () => async dispatch => {
-    
-    try{
-        const res = await axios.get(`http://localhost:5000`)
-        dispatch( {
-            type: GET_DATA,
-            payload: res.data
-        })
 
-    }
-    catch(e){
-        dispatch( {
-            type: USERS_ERROR,
-            payload: console.log(e),
-        })
-    }
+export const getData = () => dispatch => {
+    dispatch(createAction({
+        endpoint: 'http://localhost:5000',
+        method: 'GET',
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },            
+        types: [REQUEST, GET_DATA_SUCCESS, FAILURE]
+    }))
 }

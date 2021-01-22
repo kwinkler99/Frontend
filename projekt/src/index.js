@@ -5,9 +5,11 @@ import { createStore, applyMiddleware } from 'redux'
 import reducer from './Reducers/reducers'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
+import { createMiddleware } from 'redux-api-middleware';
 
 
-const store = createStore(reducer, applyMiddleware(thunk))
+const store = createStore(reducer, applyMiddleware(thunk, createMiddleware()));
+
 
 ReactDOM.render(
   <React.StrictMode>

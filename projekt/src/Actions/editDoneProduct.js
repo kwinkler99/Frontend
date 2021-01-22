@@ -1,19 +1,18 @@
-import {EDIT_DONE, USERS_ERROR} from '../types'
+import {REQUEST, EDIT_DONE, FAILURE} from '../types'
+
+import { createAction } from 'redux-api-middleware';
 
 export const editDone = (id, product) => async dispatch => {
-    
-    try{
-        dispatch( {
-            type: EDIT_DONE,
-            id: id,
-            product: product
-        })
-
-    }
-    catch(e){
-        dispatch( {
-            type: USERS_ERROR,
-            payload: console.log(e),
-        })
-    }
+    dispatch(createAction({
+        endpoint: `http://localhost:5000/${id}`,
+        method: 'PUT',
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({...product}),
+        types: [
+            REQUEST, EDIT_DONE, FAILURE
+        ]
+    }));
 }
