@@ -34,6 +34,21 @@ app.delete('/:id', function(req, res) {
   res.send(data)
 })
 
+app.put('/active/:id', function(req, res) {
+  const id = req.params.id
+  const updateProduct = data.map(item => {
+    if(item.id === parseInt(id)){
+      return {...item, active: true}
+    }
+    else{
+      return item
+    }
+  })
+
+  data = updateProduct
+  res.send(updateProduct)
+})
+
 app.put('/:id', function(req, res) {
   const id = req.params.id
   const updateProduct = data.map(item => {

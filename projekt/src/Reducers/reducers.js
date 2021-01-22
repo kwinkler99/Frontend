@@ -9,7 +9,7 @@ const initialState = {
 
 function arrangement(data){
     const response = data.map(item => {
-        const {id, brand, name, price, currency, image_link, description, category, product_types, product_colors, tag_list} = item
+        const {id, brand, name, price, currency, image_link, description, category, product_types, product_colors, tag_list, active} = item
         
         //unique colors
         const result = Array.from(new Set(product_colors.map(s => s.colour_name)))
@@ -33,7 +33,7 @@ function arrangement(data){
             product_types: product_types,
             product_colors: result,
             tag_list: tag_list,
-            active: false
+            active: active
         }
         return product
     })
@@ -82,16 +82,9 @@ const products = (state = initialState, action) => {
             }
 
         case 'EDIT_PRODUCT':
-            const editData = state.data.map(item => {
-                if (item.id === action.id){
-                    item.active = !item.active
-                }
-                return item
-            })
-
             return {
                 ...state,
-                data: editData
+                data: arrangement(action.payload)
             }
 
         case 'EDIT_DONE':
