@@ -30,7 +30,7 @@ function arrangement(data){
             image_link: image_link,
             description: description,
             category: category || "others",
-            product_types: product_types,
+            product_types: product_types || "others",
             product_colors: result,
             tag_list: tag_list,
             active: active

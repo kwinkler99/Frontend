@@ -18,8 +18,7 @@ class Details extends Component {
         this.handleEdit = this.handleEdit.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleDone = this.handleDone.bind(this)
-
-
+        this.createInput = this.createInput.bind(this)
     }
 
     handleEdit(){
@@ -44,6 +43,14 @@ class Details extends Component {
         })  
         this.props.getProduct(this.state.item.id)
 
+    }
+
+    createInput(what){
+        return (
+            <input 
+                type="text" 
+                onChange={(ev) => this.handleChange(ev.target.value, what)}
+                value={this.state.item[what]} />)
     }
 
     render(){
@@ -85,20 +92,11 @@ class Details extends Component {
                 {this.state.edit && (
                     <div className="textAlign">
                         <b>Name: </b><br/>
-                        <input 
-                            type="text" 
-                            onChange={(ev) => this.handleChange(ev.target.value, 'name')}
-                            value={this.state.item.name} /><br/>
+                        {this.createInput('name')}<br/>
                         <b>Brand: </b><br/>
-                        <input 
-                            type="text" 
-                            onChange={(ev) => this.handleChange(ev.target.value, 'brand')} 
-                            value={this.state.item.brand} /><br/>
+                        {this.createInput('brand')}<br/>
                         <b>Price: </b><br/>
-                        <input 
-                            type="text"
-                            onChange={(ev) => this.handleChange(ev.target.value, 'price')} 
-                            value={this.state.item.price} /><br/>
+                        {this.createInput('price')}<br/>
                         <b>Currency: </b>
                         <p className="textDetails">{product.currency}</p>
                         <b>Description: </b><br/>
@@ -107,15 +105,9 @@ class Details extends Component {
                             onChange={(ev) => this.handleChange(ev.target.value, 'description')} 
                             value={this.state.item.description} /><br/>
                         <b>Category: </b><br/>
-                        <input 
-                            type="text" 
-                            onChange={(ev) => this.handleChange(ev.target.value, 'category')} 
-                            value={this.state.item.category} /><br/>
+                        {this.createInput('category')}<br/>
                         <b>Type: </b><br/>
-                        <input 
-                            type="text" 
-                            onChange={(ev) => this.handleChange(ev.target.value, 'product_types')}
-                            value={this.state.item.product_types} /><br/>
+                        {this.createInput('product_types')}<br/>
                         <b>Tags: </b>
                         <p className="textDetails">{product.tag_list}</p>
                         <b>Colors: </b>
