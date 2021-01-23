@@ -15,7 +15,8 @@ app.use((req, res, next) => {
   });
 
 app.get('/', function(req, res) {
-
+  new_data = data.map(item => {return {...item, active: false}})
+  data = new_data
   res.send(data)
 });
 

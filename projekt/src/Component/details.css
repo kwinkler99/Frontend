@@ -34,3 +34,24 @@
 .textAlign{
     width: 90%;
 }
+
+.textAlign input{
+    width: 90%;
+    font-size: 15px;
+    margin-left: 20px;
+    margin: 15px;
+    padding: 10px;
+}
+
+.description{
+    font-size: 15px;
+    margin-left: 20px;
+    resize: none;
+    font-family: 'Abel', sans-serif;
+    color: #333;
+    letter-spacing: 1px;
+    line-height: 1.4;
+    margin: 15px;
+    width: 92.5%;
+    height: 120px;
+}

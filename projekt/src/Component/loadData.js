@@ -31,6 +31,7 @@ class LoadData extends Component {
         if (!active){
             this.props.history.push('/product')
             this.props.getProduct(id)
+            this.props.getData()
         }
     }
 
