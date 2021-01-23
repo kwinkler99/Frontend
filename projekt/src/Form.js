@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {getData} from './Actions/getData'
 import {editDone} from './Actions/editDoneProduct'
 import {deleteProduct} from './Actions/deleteProduct'
+import {newProduct} from './Actions/newProduct'
 
 
 
@@ -61,7 +62,7 @@ class Form extends Component {
 
     createInput(word, what){
         if(what !== 'product_colors' ){
-            return ((what !== 'description' && what !== 'id' &&
+            return ((what !== 'description' && what !== 'id' && what !== 'active' &&
                 <div key={what}>
                     <b>{word}</b><br/>
                     <input 
@@ -69,7 +70,7 @@ class Form extends Component {
                         onChange={(ev) => this.handleChange(ev.target.value, what)}
                         value={this.state.product[what]} /><br/>
                 </div>
-                ) || (what === 'description' && what !== 'id' &&
+                ) || (what === 'description' && what !== 'id' && what !== 'active' &&
                 <div key={what}>
                     <b>{word}</b><br/>
                     <textarea 
@@ -81,11 +82,24 @@ class Form extends Component {
         }
     }
 
-    handleDone(){
+    handleDone(id){
         if(this.state.take !== 'new-product'){
             this.props.editDone(this.state.product.id, this.state.product)
-            console.log("done")
+            
+            this.setState({
+                take: "new-product",
+                product: prepare_product
+            })
         }
+        else{
+            const new_product = this.state.product
+            new_product['id'] = id + 1
+            this.props.newProduct(new_product)
+            this.setState({
+                ...this.state, product: prepare_product
+            })
+        }
+        this.props.getData() 
     }
 
     handleDelete(){
@@ -94,7 +108,6 @@ class Form extends Component {
             this.setState({
                 ...this.state, product: prepare_product
             })
-            console.log("delete")
         }
     }   
 
@@ -139,7 +152,7 @@ class Form extends Component {
                 <input 
                     type="button"
                     value="Done"
-                    onClick={() => this.handleDone()}/>
+                    onClick={() => this.handleDone(data[0].id)}/>
                 <input
                     type="button"
                     value="Delete"
@@ -157,4 +170,4 @@ const mapStateToProps  = (state) => ({
     data: state.products,
 })
 
-export default connect(mapStateToProps, {getData, editDone, deleteProduct})(Form)
+export default connect(mapStateToProps, {getData, editDone, deleteProduct, newProduct})(Form)

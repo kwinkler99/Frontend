@@ -8,3 +8,4 @@ export const USERS_ERROR = 'USERS_ERROR'
 export const REQUEST = 'REQUEST';
 export const FAILURE = 'FAILURE';
 export const DONE = 'DONE';
+export const ADD_PRODUCT = 'ADD_PRODUCT'

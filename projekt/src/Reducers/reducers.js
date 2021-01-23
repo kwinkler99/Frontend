@@ -99,6 +99,12 @@ const products = (state = initialState, action) => {
                 data: arrangement(action.payload)
             }
         
+        case 'ADD_PRODUCT':
+            return {
+                ...state,
+                data: arrangement(action.payload)
+            }
+        
         case 'REQUEST':
             return state
 

@@ -65,6 +65,14 @@ app.put('/:id', function(req, res) {
   res.send(updateProduct)
 })
 
+app.post('/', function(req, res) {
+  const new_product = req.body
+  data.unshift(new_product)
+  
+  res.send(data)
+})
+
+
 app.listen(5000, function() {
   console.log('Listening you on port 5000!');
 })
