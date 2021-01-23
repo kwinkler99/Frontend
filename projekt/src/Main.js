@@ -1,6 +1,7 @@
 import React, { Component }  from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-import Home from './/Home';
+import Home from './Home';
+import Form from './Form.js'
 import Details from './Component/details.js'
 import NotFound from './Component/notFound.js';
 
@@ -16,6 +17,7 @@ class Main extends Component {
                     <Switch>
                         <Route exact path="/" component={({history}) => <Home history={history}/>} />
                         <Route path="/product" component={Details} />
+                        <Route path="/form" component={Form} />
                         <Route component={NotFound} />
                     </Switch>
                 </Router>
