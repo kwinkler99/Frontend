@@ -1,0 +1,86 @@
+body{
+    background-color: rgb(236, 236, 236);
+    font-family: 'Abel', sans-serif;
+    color: #333;
+    letter-spacing: 1px;
+    line-height: 1.4;
+    margin: auto;
+    width: 90%;
+}
+
+input, select{
+    border-radius: 3px;
+}
+
+.item{
+    display: flex;
+    flex-wrap: wrap;
+    width: 15%;
+    margin-bottom: 30px;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition:all 0.3s ease;
+}
+
+.item:hover{
+    background-color:rgb(177, 177, 177);
+    transform: scale(0.9);
+}
+
+div{
+    display: block;
+}
+
+.view{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+    border-top:3px solid rgb(82, 82, 82);
+}
+
+.brand{
+    font-weight: 800;
+}
+
+.name{
+    font-weight: 500;
+}
+
+
+img{
+    max-width:100%;
+    max-height:100%;
+}
+
+.edit{
+    width:100%;
+    height: 30px;
+    padding: 5px;
+    border: 2px solid rgb(165, 165, 165);
+    border-bottom: 2px solid rgb(73, 73, 73);
+    font-family: 'Abel', sans-serif;
+    color: rgb(31, 31, 31);
+    letter-spacing: 1px;
+    background-color: rgb(165, 165, 165);
+}
+
+.button{
+    width:100%;
+    align-self: flex-end;
+
+}
+
+.text{
+    align-self: flex-end;
+}
+
+.textEdit input{
+    height: 30px;
+    width: 95%;
+    background: white;
+}
+
+.textEdit input:hover{
+    background: rgb(175, 175, 175);
+}
