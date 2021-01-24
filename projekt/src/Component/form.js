@@ -4,6 +4,8 @@ import {getData} from '../Actions/getData'
 import {editDone} from '../Actions/editDoneProduct'
 import {deleteProduct} from '../Actions/deleteProduct'
 import {newProduct} from '../Actions/newProduct'
+import {deleteAllProducts} from '../Actions/deleteAll'
+
 import './form.css'
 
 
@@ -123,10 +125,7 @@ class Form extends Component {
             alert("At least 100 letters in description")
         }
         else{
-            if(this.state.take !== 'new-product'){
-                const filterComment = this.state.comments.filter(item => item.accept !== false)
-                this.props.editDone(this.state.product.id, {...this.state.product, comments: filterComment})
-                
+            if(this.state.take !== 'new-product'){                
                 this.setState({
                     take: "new-product",
                     product: prepare_product,
@@ -171,8 +170,8 @@ class Form extends Component {
         }
     }   
 
-    handleDeleteAll(ev, what){
-        console.log()
+    handleDeleteAll(){
+        this.props.deleteAllProducts()
     }
 
     handleReset(){
@@ -207,6 +206,10 @@ class Form extends Component {
                 }
                 return item
             })
+            if(this.state.take !== 'new-product'){   
+                const take_product = this.props.data.data.filter(item => item.id === parseInt(this.state.take))[0]
+                this.props.editDone(take_product.id, {...take_product, comments: upload})
+            }
             this.setState({
                 ...this.state, 
                 comments: [
@@ -218,7 +221,7 @@ class Form extends Component {
                         content: ""
                     }
                 ]
-            })
+            })  
         }
     }
 
@@ -331,4 +334,4 @@ const mapStateToProps  = (state) => ({
     data: state.products,
 })
 
-export default connect(mapStateToProps, {getData, editDone, deleteProduct, newProduct})(Form)
+export default connect(mapStateToProps, {getData, editDone, deleteProduct, newProduct, deleteAllProducts})(Form)

@@ -69,7 +69,7 @@
     color:rgb(214, 214, 214)
 }
 
-.commentDetails input, textarea{
+.commentDetails input, .commentDetails textarea{
     resize: none;
     width: 100%;
     text-align: left;

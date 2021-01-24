@@ -28,6 +28,13 @@ app.get('/:id', function(req, res) {
   res.send(findProduct)
 });
 
+app.delete('/all', function(req, res){
+  data = []
+
+  res.send(data)
+
+})
+
 app.delete('/:id', function(req, res) {
   const id = req.params.id
   const deleteProduct = data.filter(a => a.id !== parseInt(id))
@@ -69,19 +76,10 @@ app.put('/:id', function(req, res) {
 
 app.post('/', function(req, res) {
   const new_product = req.body
-  console.log(req.body)
   data.unshift(new_product)
   
   res.send(data)
 })
-
-app.delete('/all', function(req, res){
-  data = []
-
-  res.send(data)
-
-})
-
 
 app.listen(5000, function() {
   console.log('Listening you on port 5000!');

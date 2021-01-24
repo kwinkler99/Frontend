@@ -105,6 +105,12 @@ const products = (state = initialState, action) => {
                 ...state,
                 data: arrangement(action.payload)
             }
+
+        case 'DELETE_ALL_PRODUCT_SUCCESS':
+            return {
+                ...state,
+                data: arrangement(action.payload)
+            }
         
         case 'REQUEST':
             return state

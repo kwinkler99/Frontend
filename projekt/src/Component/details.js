@@ -93,7 +93,7 @@ class Details extends Component {
                         </div>
                         <input type="button" onClick={() => this.handleEdit()} value="Edit"/>
                         <p>Komentarze</p>
-                        {product.comments.map(comment => (
+                        {product.comments && product.comments.map(comment => (
                             <div className="commentDetails" key={comment.id}>
                                 <input 
                                     type="text"

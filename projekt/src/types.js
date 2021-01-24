@@ -9,3 +9,4 @@ export const REQUEST = 'REQUEST';
 export const FAILURE = 'FAILURE';
 export const DONE = 'DONE';
 export const ADD_PRODUCT = 'ADD_PRODUCT'
+export const DELETE_ALL_PRODUCT_SUCCESS = 'DELETE_ALL_PRODUCT_SUCCESS'
