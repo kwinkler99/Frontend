@@ -2,6 +2,7 @@ var express = require('express');
 const bp = require('body-parser')
 const fs = require('fs');
 const products = JSON.parse(fs.readFileSync('./products.json'))
+
 var app = express();
 
 let data = products
@@ -52,6 +53,7 @@ app.put('/active/:id', function(req, res) {
 
 app.put('/:id', function(req, res) {
   const id = req.params.id
+  console.log(req.body)
   const updateProduct = data.map(item => {
     if(item.id === parseInt(id)){
       return req.body
@@ -67,9 +69,17 @@ app.put('/:id', function(req, res) {
 
 app.post('/', function(req, res) {
   const new_product = req.body
+  console.log(req.body)
   data.unshift(new_product)
   
   res.send(data)
+})
+
+app.delete('/all', function(req, res){
+  data = []
+
+  res.send(data)
+
 })
 
 

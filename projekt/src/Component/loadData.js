@@ -69,7 +69,6 @@ class LoadData extends Component {
 
         return(
             <div className="view">
-                <input type="button" onClick={() => this.props.history.push('/form')} value="Form" />
                 {data.map(item => 
                     <div className="item" key={item.id} >
                         <div onClick={() => this.handleProduct(item.id, item.active)}>

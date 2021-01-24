@@ -1,0 +1,93 @@
+.form{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto;
+    margin-top: 40px;
+    border-top:3px solid rgb(82, 82, 82);
+}
+
+.formEdit{
+    grid-column: 1;
+    width: 90%;
+    margin: auto;   
+}
+
+select{
+    width: 100%;
+    margin-top: 50px;
+}
+
+.form-input{
+    margin-top: 20px;
+}
+
+.form-input input{
+    width: 90%;
+    font-size: 15px;
+    margin-left: 20px;
+    margin: 15px;
+    padding: 10px;
+}
+
+.img-buttton{
+    grid-column: 2;
+    width: 90%;
+    margin-top: 50px;
+}
+
+.imgDetails-form{
+    width: 100%;
+}
+
+
+.formButton{
+    margin: auto;
+    width: 100%;
+    font-family: 'Abel', sans-serif;
+    color: rgb(31, 31, 31);
+    letter-spacing: 1px;
+    padding: auto;
+    background-color: rgb(129, 129, 129);
+    border: 0.5px solid rgb(129, 129, 129);
+    height: 59px;
+}
+
+.allButton-form input{
+    width: 95%;
+    margin: 10px;
+    font-family: 'Abel', sans-serif;
+    color: rgb(31, 31, 31);
+    letter-spacing: 1px;
+    background-color: rgb(129, 129, 129);
+    border: 0.5px solid rgb(129, 129, 129);
+    height: 40px;
+}
+
+
+.comment{
+    grid-column: 1;
+    width: 180%;
+    border-bottom:3px solid rgb(82, 82, 82);
+    margin: auto;
+    padding: 40px
+}
+
+.comment input, textarea{
+    width: 100%;
+    margin: 5px;
+}
+
+.comment input{
+    padding: 5px;
+    font-family: 'Abel', sans-serif;
+    color: rgb(31, 31, 31);
+    letter-spacing: 1px;
+    height: 30px;
+}
+
+.comment textarea{
+    padding: 5px;
+    resize: none;
+    height: 100px;
+}
+

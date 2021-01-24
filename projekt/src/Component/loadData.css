@@ -1,10 +1,15 @@
 body{
+    background-color: rgb(223, 223, 223);
     font-family: 'Abel', sans-serif;
     color: #333;
     letter-spacing: 1px;
     line-height: 1.4;
     margin: auto;
     width: 90%;
+}
+
+input, select{
+    border-radius: 3px;
 }
 
 .item{

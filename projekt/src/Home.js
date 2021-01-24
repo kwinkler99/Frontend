@@ -9,7 +9,7 @@ class Home extends Component {
 
         return (
             <div>
-                <FilterData />
+                <FilterData {...this.props}/>
                 <LoadData {...this.props}/>
             </div>
         );

@@ -171,8 +171,13 @@ class FilterData extends Component {
                             className="reset"
                             type="button"
                             value="Reset"
-                            onClick={() => this.handleReset()}/>   
+                            onClick={() => this.handleReset()}/>
                     </div>  
+                    <input 
+                        className="form-button"
+                        type="button" 
+                        value="Go to Form"
+                        onClick={() => this.props.history.push('/form')}/>
                 </form>
             </div>
         )

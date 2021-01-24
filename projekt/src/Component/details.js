@@ -58,6 +58,11 @@ class Details extends Component {
 
         return (
             <div className="product">
+                <input 
+                    className="return"
+                    type="button" 
+                    value="Return to main page" 
+                    onClick={() => this.props.history.push("/")}/>
                 <img className="imgDetails" src={product.image_link} alt={product.name} />
                 {!this.state.edit && (
                     <div className="textAlign">
@@ -86,7 +91,18 @@ class Details extends Component {
                                     style={{backgroundColor:clr.hex_value}}>
                                 </div>)}
                         </div>
-                        <input type="button" onClick={() => this.handleEdit()} value="Edit"/>                    
+                        <input type="button" onClick={() => this.handleEdit()} value="Edit"/>
+                        <p>Komentarze</p>
+                        {product.comments.map(comment => (
+                            <div className="commentDetails" key={comment.id}>
+                                <input 
+                                    type="text"
+                                    value={comment.email}/>
+                                <textarea
+                                    placeholder="Content"
+                                    value={comment.content}/>
+                            </div>
+                        ))}                    
                     </div>
                 )}
                 {this.state.edit && (

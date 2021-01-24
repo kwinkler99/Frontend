@@ -9,7 +9,7 @@ const initialState = {
 
 function arrangement(data){
     const response = data.map(item => {
-        const {id, brand, name, price, currency, image_link, description, category, product_types, product_colors, tag_list, active} = item
+        const {id, brand, name, price, currency, image_link, description, category, product_types, product_colors, tag_list, active, comments} = item
         
         //unique colors
         const result = Array.from(new Set(product_colors.map(s => s.colour_name)))
@@ -33,7 +33,8 @@ function arrangement(data){
             product_types: product_types || "others",
             product_colors: result,
             tag_list: tag_list,
-            active: active
+            active: active,
+            comments: comments
         }
         return product
     })
