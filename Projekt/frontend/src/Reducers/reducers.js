@@ -26,7 +26,7 @@ function arrangement(data){
             brand: brand,
             name: name,
             price: parseFloat(price) || 0,
-            currency: currency,
+            currency: currency || 'other',
             image_link: image_link,
             description: description,
             category: category || "others",

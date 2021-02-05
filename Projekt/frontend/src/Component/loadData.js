@@ -13,7 +13,8 @@ class LoadData extends Component {
         super(props)
 
         this.state = {
-            edit: []
+            edit: [],
+            delete: true
         }
 
         this.handleProduct = this.handleProduct.bind(this)
@@ -37,7 +38,8 @@ class LoadData extends Component {
 
     handleEdit(id, item){
         this.setState({
-            edit: [...this.state.edit, item]
+            edit: [...this.state.edit, item],
+            delete: false
         })
         this.props.editProduct(id)
     }
@@ -55,13 +57,18 @@ class LoadData extends Component {
         })
 
         this.setState({
-            edit: editResult
+            edit: editResult,
+            delete: false
         })
     }
 
     handleEditDone(id){
         const product = this.state.edit.filter(a => a.id === id)[0]
         this.props.editDone(id, {...product, active: false })
+        this.setState({
+            ...this.state,
+            delete: true
+        })
     }
 
     render() {
@@ -103,11 +110,12 @@ class LoadData extends Component {
                             )}
                         </div>
                         <div className="button">
-                            <input
-                                className="edit" 
-                                type="button" 
-                                value="Delete"
-                                onClick={() => this.handleDelete(item.id)}/>
+                            {this.state.delete && (
+                                <input
+                                    className="edit" 
+                                    type="button" 
+                                    value="Delete"
+                                    onClick={() => this.handleDelete(item.id)}/>)}
                             {item.active && (
                                 <input 
                                     className="edit" 
