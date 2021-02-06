@@ -258,8 +258,9 @@ class EditProduct extends Component {
                                         {comment.edit && (                      
                                             <input 
                                                 className="addComment"
-                                                onClick={() => {comment.edit = false; 
-                                                    this.props.editDone(this.state.item.id, {...this.state.item, comments: this.state.comments.filter(item => item.active !== true)})       
+                                                onClick={() => {
+                                                    comment.edit = false; 
+                                                    this.props.editDone(this.state.item.id, {...this.state.item, comments: this.state.comments.filter(item => item.accept === true)})       
                                                     this.setState({...this.state, edit: false})}}
                                                 type="button"
                                                 value="Done"/>

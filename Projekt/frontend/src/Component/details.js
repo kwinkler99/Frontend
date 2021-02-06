@@ -36,9 +36,10 @@ class Details extends Component {
                         <p className="textDetails">{product.product_types}</p>
                         <b>Tags: </b>
                         <p className="textDetails">{product.tag_list}</p>
-                        <b>Comments</b>
+                        <b>Comments</b><br/>
                         {product.comments && product.comments.map(comment => (
                             <div className="commentDetails" key={comment.id}>
+                                <br/>
                                 <b>{comment.email}:</b>
                                 <p>{comment.content}</p><br/>
                             </div>

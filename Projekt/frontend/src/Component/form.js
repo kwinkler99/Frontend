@@ -322,7 +322,7 @@ class Form extends Component {
                     <img className="imgDetails-form" src={this.state.product.image_link} alt={this.state.product.name} />)}
                 </div>
                     {this.state.comments.map(comment => (
-                        <div className="comment" key={comment.id}>
+                        <div className="comment" key={comment.id}><br/>
                             {comment.validation.email && (<p className="error">Wrong email</p>)}
                             <input
                                 className="emailComment" 
