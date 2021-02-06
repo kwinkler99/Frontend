@@ -45,7 +45,7 @@ function takeCategory(data){
     const category = [...new Set(data.map((item) => item.category))].filter(
         (i) => i
     )
-    return [...category, "others", "all"]
+    return [...category, "all"]
 }
 
 const sortBy = (key) => {

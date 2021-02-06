@@ -14,7 +14,6 @@ class LoadData extends Component {
 
         this.state = {
             edit: [],
-            delete: true
         }
 
         this.handleProduct = this.handleProduct.bind(this)
@@ -39,7 +38,6 @@ class LoadData extends Component {
     handleEdit(id, item){
         this.setState({
             edit: [...this.state.edit, item],
-            delete: false
         })
         this.props.editProduct(id)
     }
@@ -58,7 +56,6 @@ class LoadData extends Component {
 
         this.setState({
             edit: editResult,
-            delete: false
         })
     }
 
@@ -67,7 +64,6 @@ class LoadData extends Component {
         this.props.editDone(id, {...product, active: false })
         this.setState({
             ...this.state,
-            delete: true
         })
     }
 
@@ -75,19 +71,36 @@ class LoadData extends Component {
         const {data} = this.props.data
 
         return(
-            <div className="view">
-                {data.map(item => 
-                    <div className="item" key={item.id} >
-                        <div onClick={() => this.handleProduct(item.id, item.active)}>
-                            <img src={item.image_link} alt={item.name} />
+            <div>
+                <div className="navbar">
+                    <input 
+                        className="form-button"
+                        type="button" 
+                        value="Add new product"
+                        onClick={() => this.props.history.push('/form')}/>
+                    <input 
+                        className="form-button"
+                        type="button" 
+                        value="Click here and choose which product delete"
+                        onClick={() => this.props.history.push('/delete')}/>
+                    <input 
+                        className="form-button"
+                        type="button" 
+                        value="Click here and choose which product you want edit"
+                        onClick={() => this.props.history.push('/edit')}/>
+                </div>
+                <div className="view">
+                    {data.map(item => 
+                        <div className="item" key={item.id}>
+                            <img src={item.image_link} alt={item.id} onClick={() => this.handleProduct(item.id, item.active)}/>
                             {!item.active && (
-                                <div className="text">
+                                <div className="text" onClick={() => this.handleProduct(item.id, item.active)}>
                                     <p className="brand">{item.brand}</p> 
                                     <p className="name">{item.name}</p>
-                                    <p className="category">Category: {item.category}</p>
-                                    <p className="price">{"$" + item.price}</p> 
+                                    <p>Category: {item.category}</p>
+                                    <p>{"$" + item.price}</p>
                                 </div>
-                            )}
+                            )}  
                             {item.active && (
                                 <div className="textEdit">
                                     <input 
@@ -108,31 +121,31 @@ class LoadData extends Component {
                                         onChange={(ev) => this.handleChangeEdit(ev.target.value, "price", item.id)} />
                                 </div>
                             )}
+                            <div className="button">
+                                {!item.active && (
+                                    <input
+                                        className="edit" 
+                                        type="button" 
+                                        value="Delete"
+                                        onClick={() => this.handleDelete(item.id)}/>)}
+                                {item.active && (
+                                    <input 
+                                        className="edit" 
+                                        type="button"
+                                        value="Done"
+                                        onClick={() => this.handleEditDone(item.id)}/>
+                                )}
+                                {!item.active && (
+                                    <input 
+                                        className="edit" 
+                                        type="button"
+                                        value="Edit"
+                                        onClick={() => this.handleEdit(item.id, item)}/>
+                                )}
+                            </div>
                         </div>
-                        <div className="button">
-                            {this.state.delete && (
-                                <input
-                                    className="edit" 
-                                    type="button" 
-                                    value="Delete"
-                                    onClick={() => this.handleDelete(item.id)}/>)}
-                            {item.active && (
-                                <input 
-                                    className="edit" 
-                                    type="button"
-                                    value="Done"
-                                    onClick={() => this.handleEditDone(item.id)}/>
-                            )}
-                            {!item.active && (
-                                <input 
-                                    className="edit" 
-                                    type="button"
-                                    value="Edit"
-                                    onClick={() => this.handleEdit(item.id, item)}/>
-                            )}
-                        </div>
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
         )
     }

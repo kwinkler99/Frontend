@@ -112,73 +112,61 @@ class FilterData extends Component {
 
         return(
             <div className="filter">
-                <form>
-                    <div>
-                        <input 
-                            type="text" 
-                            value={this.state.text} 
-                            onChange={(ev) => this.handleText(ev.target.value)} 
-                            placeholder="wpisz nazwe produktu" /> 
-                        <select 
-                            onChange={(ev) => this.handleSort(ev.target.value)} 
-                            value={this.state.sort}>
-                            {select.map(item => 
-                                <option 
-                                    key={item} 
-                                    value={item}>
-                                {item}</option>
-                                )}
-
-                        </select>
-                    </div>
-                    <div>
-                        {category
-                            .map(item => (
-                                <div className="checkbox" key={item}>
-                                    <label>{item}</label>
-                                    <input 
-                                        checked={this.state.check.includes(item)}
-                                        type = "checkbox" 
-                                        value = {item} 
-                                        onChange={(ev) => this.handleCheck(ev.target)}
-                                    />
-                                </div>
-                            )
-                        )} 
-                    </div>
-                    <div className="setPrice">
-                        <p>Cena od: </p>
-                        <input
-                            className="number" 
-                            type="number"
-                            value={this.state.from}
-                            onChange={(ev) => this.handleFrom(ev.target.value)}/>
-                    
-                        <p>Cena do: </p>
-                        <input 
-                            className="number" 
-                            type="number"
-                            value={this.state.to === null ? price : this.state.to}
-                            onChange={(ev) => this.handleTo(ev.target.value)}/><br/>
-                    </div>
-                    <div>
-                        <input
-                            className="done"
-                            type="button"
-                            value="Zatwierdz"
-                            onClick={() => this.handleDone()}/> 
-                        <input
-                            className="reset"
-                            type="button"
-                            value="Reset"
-                            onClick={() => this.handleReset()}/>
-                    </div>  
+                <div className="title">Filter data</div>
+                <div>
                     <input 
-                        className="form-button"
-                        type="button" 
-                        value="Go to Form"
-                        onClick={() => this.props.history.push('/form')}/>
-                </form>
+                        type="text" 
+                        value={this.state.text} 
+                        onChange={(ev) => this.handleText(ev.target.value)} 
+                        placeholder="Type product name" /> 
+                    <select 
+                        onChange={(ev) => this.handleSort(ev.target.value)} 
+                        value={this.state.sort}>
+                        {select.map(item => 
+                            <option 
+                                key={item} 
+                                value={item}>
+                            {item}</option>
+                            )}
+
+                    </select>
+                </div>
+                <div>
+                    {category
+                        .map(item => (
+                            <div key={item}>
+                                <label>{item}</label>
+                                <input 
+                                    checked={this.state.check.includes(item)}
+                                    type = "checkbox" 
+                                    value = {item} 
+                                    onChange={(ev) => this.handleCheck(ev.target)}
+                                />
+                            </div>
+                        )
+                    )} 
+                </div>
+                <div>
+                    <p>Cena od: </p>
+                    <input
+                        type="number"
+                        value={this.state.from}
+                        onChange={(ev) => this.handleFrom(ev.target.value)}/>
+                
+                    <p>Cena do: </p>
+                    <input
+                        type="number"
+                        value={this.state.to === null ? price : this.state.to}
+                        onChange={(ev) => this.handleTo(ev.target.value)}/><br/>
+                    <input
+                        type="button"
+                        value="Done"
+                        onClick={() => this.handleDone()}/> 
+                    <input
+                        type="button"
+                        value="Reset"
+                        onClick={() => this.handleReset()}/>
+                </div>  
             </div>
         )
     }

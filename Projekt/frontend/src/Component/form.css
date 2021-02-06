@@ -1,103 +1,53 @@
 .form{
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: auto;
-    margin-top: 40px;
-    border-top:3px solid rgb(82, 82, 82);
+    max-width: 500px;
+	margin: 10px auto;
+	padding: 20px;
+	background: #f4f7f8;
+	border-radius: 8px;
+	font-family: Georgia, "Times New Roman", Times, serif;
 }
 
-.formEdit{
-    grid-column: 1;
-    width: 90%;
-    margin: auto;   
+.form input[type="text"],
+.form input[type="number"],
+.form select,
+.form textarea {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	background: rgba(255,255,255,.1);
+	border: none;
+	border-radius: 4px;
+	font-size: 15px;
+	margin: 0;
+	outline: 0;
+	padding: 10px;
+	width: 100%;
+	box-sizing: border-box; 
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box; 
+	background-color: #e8eeef;
+	color:#656e75;
+	-webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+	box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+	margin-bottom: 20px;
 }
 
-select{
-    width: 100%;
-    margin-top: 50px;
-}
-
-.form-input{
-    margin-top: 20px;
-}
-
-.form-input input{
-    width: 90%;
-    font-size: 15px;
-    margin-left: 20px;
-    margin: 15px;
-    padding: 10px;
-}
-
-.img-buttton{
-    grid-column: 2;
-    width: 90%;
-    margin-top: 50px;
-}
-
-.imgDetails-form{
-    width: 100%;
-}
-
-
-.formButton{
-    margin: auto;
-    width: 100%;
-    font-family: 'Abel', sans-serif;
-    color: rgb(31, 31, 31);
-    letter-spacing: 1px;
-    padding: auto;
-    background-color: rgb(129, 129, 129);
-    border: 0.5px solid rgb(129, 129, 129);
-    height: 59px;
-}
-
-.allButton-form input{
-    width: 95%;
-    margin: 10px;
-    font-family: 'Abel', sans-serif;
-    color: rgb(31, 31, 31);
-    letter-spacing: 1px;
-    background-color: rgb(129, 129, 129);
-    border: 0.5px solid rgb(129, 129, 129);
-    height: 40px;
-}
-
-
-.comment{
-    grid-column: 1;
-    width: 180%;
-    border-bottom:3px solid rgb(82, 82, 82);
-    margin: auto;
-    padding: 40px
-}
-
-.comment input, textarea{
-    width: 100%;
-    margin: 5px;
-}
-
-.emailComment{
-    padding: 5px;
-    font-family: 'Abel', sans-serif;
-    color: rgb(31, 31, 31);
-    letter-spacing: 1px;
-    height: 30px;
-}
-
-.comment textarea{
-    padding: 5px;
+.form textarea{
     resize: none;
-    height: 100px;
 }
 
-.addComment{
-    font-family: 'Abel', sans-serif;
-    color: rgb(31, 31, 31);
-    letter-spacing: 1px;
-    background-color: rgb(129, 129, 129);
-    border: 0.5px solid rgb(129, 129, 129);
-    height: 50px;
+.form input[type="button"] {
+    position: relative;
+	display: block;
+	padding: 19px 39px 18px 39px;
+	color: #FFF;
+	margin: 0 auto;
+	background: #389482;
+	font-size: 18px;
+	text-align: center;
+	font-style: normal;
+	width: 100%;
+	border: 1px solid #389482;
+	border-width: 1px 1px 3px;
+	margin-bottom: 20px;
 }
 
 .error{
@@ -105,15 +55,13 @@ select{
 }
 
 .confirmDeleteAll{
-    background-color: rgb(187, 187, 187);
-    border-radius: 20%;
-    height: 200px;
-    width: 400px;
+	font-size: 25px;
+    background: #389482;
+	text-align: center;
+	margin: 0 auto;
+    height: 210px;
+    width: 100%;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    margin-top: -100px;
-    margin-left: -200px;
-    padding: 40px;
-    text-align: center;  
+    top: 0;
+    left: 0;
 }
