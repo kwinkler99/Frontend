@@ -36,16 +36,7 @@ class Details extends Component {
                         <p className="textDetails">{product.product_types}</p>
                         <b>Tags: </b>
                         <p className="textDetails">{product.tag_list}</p>
-                        <b>Colors: </b>
-                        <div id="colors">
-                            {product.product_colors.map(clr => 
-                                <div 
-                                    key={clr.colour_name} 
-                                    className="color" 
-                                    style={{backgroundColor:clr.hex_value}}>
-                                </div>)}
-                        </div>
-                        <p>Komentarze</p>
+                        <b>Comments</b>
                         {product.comments && product.comments.map(comment => (
                             <div className="commentDetails" key={comment.id}>
                                 <b>{comment.email}:</b>
