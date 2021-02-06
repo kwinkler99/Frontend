@@ -51,22 +51,24 @@ class EditProduct extends Component {
 
     componentDidMount() {
         const params = this.props.history.location.params
-        this.setState({
-            item: params,
-            comments: [...params.comments,
-                {
-                    id: params.comments.length,
-                    accept: false,
-                    email: "",
-                    content: "",
-                    validation: {
-                        email: false,
-                        content: false
+        if (params){
+            this.setState({
+                item: params,
+                comments: [...params.comments,
+                    {
+                        id: params.comments.length,
+                        accept: false,
+                        email: "",
+                        content: "",
+                        validation: {
+                            email: false,
+                            content: false
+                        }
                     }
-                }
-            ],
-            edit: false
-        })
+                ],
+                edit: false
+            })
+        }
     }
 
     handleChange(ev, what){
